@@ -32,7 +32,7 @@ const Navbar = () => {
                         </div>
                         {/* dropdown end*/}
 
-                        {/* <form className="mb-0 hidden lg:flex">
+                        <form className="mb-0 hidden lg:flex">
                             <div className="relative">
                                 <input
                                     className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-300 focus:z-10"
@@ -59,7 +59,7 @@ const Navbar = () => {
                                     </svg>
                                 </button>
                             </div>
-                        </form> */}
+                        </form>
                         <nav aria-label="Site Nav"
                             className="hidden lg:flex lg:gap-4 lg:text-xs lg:font-bold lg:uppercase lg:tracking-wide lg:text-gray-500">
                             <Link
