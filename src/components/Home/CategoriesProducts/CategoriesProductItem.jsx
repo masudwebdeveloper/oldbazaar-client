@@ -1,17 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CateforiesProductItem = ({category}) => {
-    const {title, resalePirce, picture} = category;
+const CategoriesProductItem = ({ category }) => {
+    const { title, resalePirce, picture, _id } = category;
     return (
         <div>
-            <a href="#" class="relative block border border-gray-300 rounded-md p-5">
+            <Link to={`/details/${_id}`} className="relative block border border-gray-300 rounded-md p-5">
                 <button
                     type="button"
-                    class="absolute right-4 top-4 rounded-full bg-black p-2 text-white"
+                    className="absolute right-4 top-4 rounded-full bg-black p-2 text-white"
                 >
-                    <span class="sr-only">Wishlist</span>
+                    <span className="sr-only">Wishlist</span>
                     <svg
-                        class="h-4 w-4"
+                        className="h-4 w-4"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -29,28 +30,28 @@ const CateforiesProductItem = ({category}) => {
                 <img
                     alt="Toy"
                     src={picture}
-                    class="h-56 w-full object-contain lg:h-72"
+                    className="h-56 w-full object-contain lg:h-72"
                 />
 
-                <div class="p-6">
-                    <strong class="inline-block bg-yellow-400 px-3 py-1 text-xs font-medium">
+                <div className="p-6">
+                    <strong className="inline-block bg-yellow-400 px-3 py-1 text-xs font-medium">
                         New
                     </strong>
 
-                    <h3 class="mt-4 text-lg font-bold">{title}</h3>
+                    <h3 className="mt-4 text-lg font-bold">{title}</h3>
 
-                    <p class="mt-2 text-sm text-gray-700">${resalePirce}</p>
+                    <p className="mt-2 text-sm text-gray-700">${resalePirce}</p>
 
                     <button
                         type="button"
-                        class="mt-4 block w-full rounded-sm bg-secondary text-white p-4 text-sm font-medium"
+                        className="mt-4 block w-full rounded-sm bg-secondary text-white p-4 text-sm font-medium"
                     >
                         Buy Now
                     </button>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };
 
-export default CateforiesProductItem;
+export default CategoriesProductItem;
