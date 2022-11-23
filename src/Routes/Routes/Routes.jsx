@@ -1,3 +1,4 @@
+import CategoriesProducts from "../../components/Home/CategoriesProducts/CategoriesProducts";
 import Home from "../../components/Home/Home/Home";
 import ErrorPage from "../../components/Others/ErrorPage/ErrorPage";
 import Login from "../../components/Shared/Login/Login";
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
             {
                 path: '/home',
                 element: <Home></Home>
+            },
+            {
+                path: '/categories/:id',
+                element: <CategoriesProducts></CategoriesProducts>,
+                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
             },
             {
                 path: '/signup',
