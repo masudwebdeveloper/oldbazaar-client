@@ -1,6 +1,7 @@
 import AddProduct from "../../components/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../../components/Dashboard/AllUsers/AllUsers";
 import MyProducts from "../../components/Dashboard/MyProducts/MyProducts";
+import WishlistProducts from "../../components/Dashboard/WishlistProducts/WishlistProducts";
 import CategoriesProducts from "../../components/Home/CategoriesProducts/CategoriesProducts";
 import Home from "../../components/Home/Home/Home";
 import ProductsDetails from "../../components/Home/ProductsDetails/ProductsDetails";
@@ -63,7 +64,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addproduct',
                 element: <AddProduct></AddProduct>
-            }
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <WishlistProducts></WishlistProducts>
+            },
         ]
     }
 ])

@@ -7,8 +7,8 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const ProductsDetails = () => {
     const product = useLoaderData();
     const { user } = useContext(AuthContext);
-    const { title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
-    const wishlist = localStorage.getItem('wishlist')
+    const {_id, title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
+    const wishlist = localStorage.getItem(`${_id}`)
     const handleWishlist = product => {
 
         const wishlistProduct = {
@@ -29,7 +29,7 @@ const ProductsDetails = () => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('This reserved for you buy soon')
-                    localStorage.setItem('wishlist', true)
+                    localStorage.setItem(`${product._id}`, true)
                 }
                 if (!data.acknowledged) {
                     toast.error(data.message)
