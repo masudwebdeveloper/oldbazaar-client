@@ -1,11 +1,48 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
 const ProductsDetails = () => {
     const product = useLoaderData();
+    const { user } = useContext(AuthContext);
     const { title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
+    const wishlist = localStorage.getItem('wishlist')
+    const handleWishlist = product => {
 
+        const wishlistProduct = {
+            ...product,
+            email: user.email,
+            productId: product._id
+        }
+        delete wishlistProduct._id;
+        fetch(`http://localhost:5000/wishlist`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishlistProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('This reserved for you buy soon')
+                    localStorage.setItem('wishlist', true)
+                }
+                if (!data.acknowledged) {
+                    toast.error(data.message)
+                }
+            })
+            .catch(err => {
+                console.error('wishlist error', err);
+            })
+    }
+
+    const handleReport = product => {
+        console.log(product._id);
+    }
     return (
         <div>
             <section>
@@ -123,12 +160,44 @@ const ProductsDetails = () => {
                                     Buy Now
                                 </button>
 
-                                <button
-                                    type="button"
-                                    class="w-full rounded border border-gray-300 bg-gray-100 px-6 py-3 text-sm font-bold uppercase tracking-wide"
-                                >
-                                    Notify when on sale
-                                </button>
+                                <div className='flex justify-between mt-5'>
+                                    <button
+                                        type="button"
+                                        class={`rounded-full ${wishlist ? 'bg-red-600' : 'bg-black'} p-2 text-white animate-bounce`}
+                                        title='Wishlist'
+                                        onClick={() => handleWishlist(product)}
+                                    >
+                                        <span class="sr-only">Wishlist</span>
+                                        <svg
+                                            class="h-6 w-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class={`rounded-full bg-black p-2 text-white animate-bounce`}
+                                        title='Report'
+                                        onClick={() => handleReport(product)}
+                                    >
+                                        <span class="sr-only">Report</span>
+
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" />
+                                        </svg>
+
+                                    </button>
+                                </div>
                             </form>
                         </div>
 
@@ -137,12 +206,12 @@ const ProductsDetails = () => {
                                 class="prose max-w-none [&>iframe]:mt-6 [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:rounded-xl"
                             >
                                 <p>
-                                    
-                                    
+
+
                                     {description}
                                 </p>
 
-                                
+
 
                                 <h2>Features</h2>
 
