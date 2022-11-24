@@ -1,3 +1,4 @@
+import AddProduct from "../../components/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../../components/Dashboard/AllUsers/AllUsers";
 import MyProducts from "../../components/Dashboard/MyProducts/MyProducts";
 import CategoriesProducts from "../../components/Home/CategoriesProducts/CategoriesProducts";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
                 path: '/dashboard/allusers',
                 element: <AllUsers></AllUsers>
             },
+            {
+                path: '/dashboard/addproduct',
+                element: <AddProduct></AddProduct>
+            }
         ]
     }
 ])
