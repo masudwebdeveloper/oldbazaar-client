@@ -1,9 +1,12 @@
+import AllUsers from "../../components/Dashboard/AllUsers/AllUsers";
+import MyProducts from "../../components/Dashboard/MyProducts/MyProducts";
 import CategoriesProducts from "../../components/Home/CategoriesProducts/CategoriesProducts";
 import Home from "../../components/Home/Home/Home";
 import ProductsDetails from "../../components/Home/ProductsDetails/ProductsDetails";
 import ErrorPage from "../../components/Others/ErrorPage/ErrorPage";
 import Login from "../../components/Shared/Login/Login";
 import SignUp from "../../components/Shared/SignUp/SignUp";
+import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layouts/Main/Main");
@@ -41,6 +44,21 @@ const router = createBrowserRouter([
                 element: <Login></Login>
             },
 
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+            {
+                path: '/dashboard/myproducts',
+                element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AllUsers></AllUsers>
+            },
         ]
     }
 ])

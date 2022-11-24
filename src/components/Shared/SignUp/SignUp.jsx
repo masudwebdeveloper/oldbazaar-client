@@ -18,6 +18,7 @@ const SignUp = () => {
         const firstName = data.firstName;
         const lastName = data.lastName;
         const fullName = `${firstName} ${lastName}`;
+        const option = data.option;
         const email = data.email;
         const password = data.password;
         const password_confirmation = data.password_confirmation;
@@ -35,9 +36,10 @@ const SignUp = () => {
                     displayName: fullName
                 }
                 updateUserProfile(userProfile)
-                    .then(() => { 
+                    .then(() => {
                         toast.success('Your account create Successfull')
-                        navigate('/')
+                        saveUser(fullName, email, option)
+                        
                     })
                     .catch(err => {
                         console.error(err.message);
@@ -49,6 +51,23 @@ const SignUp = () => {
                 console.error(err.message);
                 setSignUpError(err.message);
             })
+    }
+
+    const saveUser = (name, email, role) =>{
+        const userInfo = {name, email, role};
+        fetch('http://localhost:5000/users',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userInfo)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.acknowledged){
+                navigate('/')
+            }
+        })
     }
     return (
         <section className="bg-white">
@@ -126,6 +145,7 @@ const SignUp = () => {
                         </div>
 
                         <form onSubmit={handleSubmit(handleSignUp)} className="mt-8 grid grid-cols-6 gap-6">
+
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="FirstName"
@@ -142,7 +162,7 @@ const SignUp = () => {
                                     {...register('firstName', { required: "FirstName is Required" })}
                                     aria-invalid={errors.firstName ? 'true' : 'false'}
                                 />
-                                {errors?.firstName && <span className='text-red-600'>{errors?.firstName?.message}</span>}
+                                {errors.firstName && <span className='text-red-600'>{errors.firstName?.message}</span>}
                             </div>
 
                             <div className="col-span-6 sm:col-span-3">
@@ -162,6 +182,25 @@ const SignUp = () => {
                                     aria-invalid={errors.lastName ? 'true' : 'false'}
                                 />
                                 {errors.lastName && <span className='text-red-600'>{errors.lastName?.message}</span>}
+                            </div>
+                            <div className="col-span-6 sm:col-span-3">
+                                <label
+                                    htmlFor="FirstName"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Are you seller or buyer?
+                                </label>
+
+                                <select
+                                 name="option"
+                                 className="select select-bordered w-full max-w-xs"
+                                 {...register('option', {required: "Option is required"})}
+                                 >
+                                    <option disabled selected>Who shot first?</option>
+                                    <option value="Buyer">Buyer</option>
+                                    <option value="Seller">Seller</option>
+                                </select>
+                                {errors.option && <span className='text-red-600'>{errors.option?.message}</span>}
                             </div>
                             <div className="col-span-6">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
