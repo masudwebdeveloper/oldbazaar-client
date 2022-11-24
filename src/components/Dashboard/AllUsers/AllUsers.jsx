@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const AllUsers = () => {
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
@@ -12,9 +13,38 @@ const AllUsers = () => {
     })
 
     //for user delete function rechieve id 
-    const handleUserDelete = id =>{
+    const handleUserDelete = user => {
+        fetch(`http://localhost:5000/users/${user?._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success(`${user?.name} is deleted successfully`)
+                    refetch();
+                }
+            })
+            .catch(err => {
+                toast.error('delete error', err.message)
+            })
+    }
 
-        console.log(id);
+    // give super power for special person so be care full
+    const handleUserMakeAdmin = user => {
+        console.log(user._id);
+        fetch(`http://localhost:5000/users/admin/${user?._id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success(`Pomotion successfull of ${user?.name}`)
+                    refetch();
+                }
+            })
+            .catch(err => {
+                toast.error('update error', err.message)
+            })
     }
     return (
         <div class="overflow-hidden overflow-x-auto rounded-lg border border-gray-200">
@@ -113,6 +143,26 @@ const AllUsers = () => {
                         <th
                             class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
                         >
+                            <div class="flex items-center gap-2">
+                                Role Action
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 text-gray-700"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </th>
+                        <th
+                            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+                        >
                             Status
                         </th>
                     </tr>
@@ -139,8 +189,18 @@ const AllUsers = () => {
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{user?.email}</td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">{user?.role}</td>
+                            {
+                                user?.role !== 'admin' ? <td class="whitespace-nowrap px-4 py-2">
+                                    <button onClick={() => handleUserMakeAdmin(user)}
+                                        class="inline-block rounded bg-green-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+
+                                    >
+                                        Make Admin
+                                    </button>
+                                </td> : <td></td>
+                            }
                             <td class="whitespace-nowrap px-4 py-2">
-                                <button onClick={()=> handleUserDelete(user?._id)}
+                                <button onClick={() => handleUserDelete(user)}
                                     class="inline-block rounded bg-red-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
 
                                 >
