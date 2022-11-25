@@ -3,10 +3,11 @@ import React, { useContext } from 'react';
 import 'react-photo-view/dist/react-photo-view.css';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const { data: products = [] } = useQuery({
+    const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/myproducts?email=${user?.email}`);
@@ -16,7 +17,21 @@ const MyProducts = () => {
     })
 
     const handleDelete = product =>{
-        console.log(product._id);
+        fetch(`http://localhost:5000/myproducts/${product._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.deletedCount > 0){
+                toast.success('My Product deleted Successfull')
+                refetch()
+            }
+            console.log();
+        })
+        .catch(err => console.error('my product deleted error', err));
     }
     return (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
