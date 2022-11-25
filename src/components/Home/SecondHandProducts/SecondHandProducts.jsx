@@ -43,7 +43,7 @@ const SecondHandProducts = () => {
                             <h2
                                 className="mt-1 text-2xl font-extrabold uppercase tracking-wide lg:text-3xl"
                             >
-                                Trainers
+                                Phone Finder
                             </h2>
                         </div>
 

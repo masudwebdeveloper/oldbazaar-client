@@ -42,7 +42,7 @@ const MyProducts = () => {
 
         }
         delete advertiseProductData._id
-        fetch('http://localhost:5000/adveritse',{
+        fetch('http://localhost:5000/advertise',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
