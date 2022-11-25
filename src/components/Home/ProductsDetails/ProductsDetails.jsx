@@ -89,7 +89,7 @@ const ProductsDetails = () => {
                                 <img
                                     alt="Tee"
                                     src={picture}
-                                    class="h-72 w-full rounded-xl object-cover lg:h-full p-5 context"
+                                    class="h-72 w-1/2 mx-auto rounded-xl object-cover lg:h-full p-5 context"
                                 />
 
 

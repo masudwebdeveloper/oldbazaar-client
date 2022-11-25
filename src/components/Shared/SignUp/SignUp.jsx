@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../../hooks/useToken';
 
 
 const SignUp = () => {
@@ -10,8 +11,13 @@ const SignUp = () => {
     const [signUpError, setSignUpError] = useState('');
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
+    const [createUserEmail, setCreateUserEmail] = useState('');
+    const [token] = useToken(createUserEmail);
     const navigate = useNavigate();
 
+    if (token) {
+        navigate('/')
+    }
     const handleSignUp = data => {
         setPasswordMatch('');
         setSignUpError('');
@@ -39,7 +45,7 @@ const SignUp = () => {
                     .then(() => {
                         toast.success('Your account create Successfull')
                         saveUser(fullName, email, option)
-                        
+
                     })
                     .catch(err => {
                         console.error(err.message);
@@ -53,21 +59,21 @@ const SignUp = () => {
             })
     }
 
-    const saveUser = (name, email, role) =>{
-        const userInfo = {name, email, role};
-        fetch('http://localhost:5000/users',{
+    const saveUser = (name, email, role) => {
+        const userInfo = { name, email, role };
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(userInfo)
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.acknowledged){
-                navigate('/')
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    setCreateUserEmail(email);
+                }
+            })
     }
     return (
         <section className="bg-white">
@@ -192,10 +198,10 @@ const SignUp = () => {
                                 </label>
 
                                 <select
-                                 name="option"
-                                 className="select select-bordered w-full max-w-xs"
-                                 {...register('option', {required: "Option is required"})}
-                                 >
+                                    name="option"
+                                    className="select select-bordered w-full max-w-xs"
+                                    {...register('option', { required: "Option is required" })}
+                                >
                                     <option disabled selected>Who shot first?</option>
                                     <option value="Buyer">Buyer</option>
                                     <option value="Seller">Seller</option>

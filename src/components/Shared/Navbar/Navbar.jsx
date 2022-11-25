@@ -61,7 +61,7 @@ const Navbar = () => {
                             </div>
                         </form>
                         <nav aria-label="Site Nav"
-                            className="hidden lg:flex lg:gap-4 lg:text-xs lg:font-bold lg:uppercase lg:tracking-wide lg:text-gray-500">
+                            className="hidden lg:flex lg:gap-4 lg:text-xs lg:font-bold lg:uppercase lg:tracking-wide lg:text-gray-500 ml-10">
                             <Link
                                 to="/"
                                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
@@ -89,7 +89,7 @@ const Navbar = () => {
                         </nav>
                     </div>
                     <div className="flex flex-1 items-center justify-end">
-                        
+
 
                         <div className="ml-8 flex items-center justify-end">
                             <div
@@ -97,7 +97,7 @@ const Navbar = () => {
                                 {/* list */}
                                 <div className="hidden items-center gap-4 lg:flex">
                                     {/* condition */}
-                                    {user?.uid ?
+                                    {user?.email ?
                                         <>
                                             <Link
                                                 to="/dashboard"
@@ -110,15 +110,18 @@ const Navbar = () => {
 
                                         </>
                                         :
-                                        <Link to="/login" className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600">
-                                            Login
-                                        </Link>}
+                                        <>
+                                            <Link to="/login" className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600">
+                                                Login
+                                            </Link>
+                                            <Link
+                                                to="/signup"
+                                                className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white">
+                                                Signup
+                                            </Link>
+                                        </>
+                                    }
 
-                                    <Link
-                                        to="/signup"
-                                        className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white">
-                                        Signup
-                                    </Link>
                                 </div>
                             </div>
 

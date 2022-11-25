@@ -42,7 +42,7 @@ const BookingModal = ({ product, setOption}) => {
                     setOption(false)
                     // refetch();
                 } else {
-                    toast.error("booking hoi nai")
+                    toast.error(data.message)
                     setOption(false)
 
                 }

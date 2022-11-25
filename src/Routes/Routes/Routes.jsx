@@ -1,5 +1,6 @@
 import AddProduct from "../../components/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../../components/Dashboard/AllUsers/AllUsers";
+import MyBookingProducts from "../../components/Dashboard/MyBookingProducts/MyBookingProducts";
 import MyProducts from "../../components/Dashboard/MyProducts/MyProducts";
 import ReportsProducts from "../../components/Dashboard/ReportsProducts/ReportsProducts";
 import WishlistProducts from "../../components/Dashboard/WishlistProducts/WishlistProducts";
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
                 path: '/dashboard/report',
                 element: <ReportsProducts></ReportsProducts>
             },
+            {
+                path: '/dashboard/mybookings',
+                element: <MyBookingProducts></MyBookingProducts>
+            },
+            
         ]
     }
 ])

@@ -1,13 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useToken from '../../../hooks/useToken';
+
 
 
 const Login = () => {
     const [loginError, setLoginError] = useState('');
     const { login } = useContext(AuthContext);
+    const [createUserEmail, setCreateUserEmail] = useState('');
+    const [token] = useToken(createUserEmail);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    if(token){
+        navigate('/')
+    }
     const handleLogin = data => {
         const email = data.email;
         const password = data.password;
@@ -15,13 +23,13 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setCreateUserEmail(email)
 
             })
             .catch(err => {
                 console.error(err.message);
                 setLoginError(err.message);
             })
-        console.log(data);
     }
 
     return (
