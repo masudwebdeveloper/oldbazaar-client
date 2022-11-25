@@ -12,8 +12,6 @@ const CategoriesProducts = () => {
                     category={category}
                 ></CategoriesProductItem>)
             }
-
-
         </div>
     );
 };

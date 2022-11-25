@@ -1,6 +1,7 @@
 import AddProduct from "../../components/Dashboard/AddProduct/AddProduct";
 import AllUsers from "../../components/Dashboard/AllUsers/AllUsers";
 import MyProducts from "../../components/Dashboard/MyProducts/MyProducts";
+import ReportsProducts from "../../components/Dashboard/ReportsProducts/ReportsProducts";
 import WishlistProducts from "../../components/Dashboard/WishlistProducts/WishlistProducts";
 import CategoriesProducts from "../../components/Home/CategoriesProducts/CategoriesProducts";
 import Home from "../../components/Home/Home/Home";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/wishlist',
                 element: <WishlistProducts></WishlistProducts>
+            },
+            {
+                path: '/dashboard/report',
+                element: <ReportsProducts></ReportsProducts>
             },
         ]
     }

@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import BookingModal from '../BookingModal/BookingModal';
 
 
 const ProductsDetails = () => {
     const product = useLoaderData();
+    const [option, setOption] = useState(true);
     const { user } = useContext(AuthContext);
-    const {_id, title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
+    const { _id, title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
     const wishlist = localStorage.getItem(`${_id}`)
     const handleWishlist = product => {
 
@@ -42,6 +44,34 @@ const ProductsDetails = () => {
 
     const handleReport = product => {
         console.log(product._id);
+        const reportProduct = {
+            ...product,
+            email: user.email,
+            productId: product._id,
+            report: "Reported"
+        }
+        delete reportProduct._id;
+        fetch(`http://localhost:5000/report`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(reportProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('This product reported successfull')
+                    localStorage.setItem(`${product._id}`, true)
+                }
+                if (!data.acknowledged) {
+                    toast.error(data.message)
+                }
+            })
+            .catch(err => {
+                console.error('reported error', err);
+            })
     }
     return (
         <div>
@@ -153,12 +183,13 @@ const ProductsDetails = () => {
                                     <p class="text-xl font-bold">Original Price: ${originalPirce}</p>
                                 </div>
 
-                                <button
+                                <label
                                     type="submit"
+                                    htmlFor="booking-modal"
                                     class="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
                                 >
                                     Buy Now
-                                </button>
+                                </label>
 
                                 <div className='flex justify-between mt-5'>
                                     <button
@@ -226,6 +257,12 @@ const ProductsDetails = () => {
                     </div>
                 </div>
             </section>
+            {option &&
+                <BookingModal
+                    product={product}
+                    setOption={setOption}
+                ></BookingModal>
+            }
         </div>
 
     );
