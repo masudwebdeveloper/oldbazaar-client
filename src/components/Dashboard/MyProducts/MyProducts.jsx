@@ -33,6 +33,34 @@ const MyProducts = () => {
         })
         .catch(err => console.error('my product deleted error', err));
     }
+
+    const handleAdvertise = product =>{
+        const advertiseProductData = {
+            ...product,
+            productId: product._id,
+            email: user?.email || 'unauthorization',
+
+        }
+        delete advertiseProductData._id
+        fetch('http://localhost:5000/adveritse',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(advertiseProductData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.acknowledged){
+                toast.success('Your Product Advertise is Running Pay for Advertise')
+            }
+            console.log(data);
+        })
+        .catch(err => {
+            console.error('advertise post error', err);
+        })
+    }
     return (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
             {
@@ -83,7 +111,7 @@ const MyProducts = () => {
                         </div>
                         <div className='mt-6 grid grid-cols-2 gap-8'>
                             <button onClick={()=>handleDelete(product)} className='btn btn-sm btn-error text-white'>delete</button>
-                            <button className='btn btn-sm btn-primary text-white'>Advertise</button>
+                            <button onClick={()=> handleAdvertise(product)} className='btn btn-sm btn-primary text-white'>Advertise</button>
                         </div>
                     </div>
                 </div>)
