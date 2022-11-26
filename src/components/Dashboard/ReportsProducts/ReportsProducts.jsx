@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const ReportsProducts = () => {
     const { user } = useContext(AuthContext);
-    const { data: reports = [] } = useQuery({
+    const { data: reports = [], refetch } = useQuery({
         queryKey: ['wishlist'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/report`);
@@ -14,6 +15,49 @@ const ReportsProducts = () => {
             return data;
         }
     })
+
+    const handleDelete = product => {
+        const procceed = window.confirm(`Are you sure. do you want delete ${product?.title}`)
+        if (procceed) {
+            fetch(`http://localhost:5000/reportproduct/${product.productId}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        handleReportDelete(product._id)
+                        
+                    }
+                })
+                .catch(err => {
+                    console.error('report product deleted error', err);
+                })
+        }
+
+    }
+
+    const handleReportDelete = id =>{
+        console.log(id);
+        fetch(`http://localhost:5000/reportproductdelete/${id}`,{
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.deletedCount > 0){
+                toast.success('Reported product deleted sucessfull');
+                refetch();
+            }
+        })
+        .catch(err => {
+            console.error('hadleReport Delete error', err);
+        })
+    }
     return (
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -72,7 +116,7 @@ const ReportsProducts = () => {
                             </td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{report.productId}</strong></td>
                             <td class="whitespace-nowrap px-4 py-2 text-red-700 bg-gray-200 text-xl font-bold text-center"><strong>{report?.report}</strong></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-error hover:animate-pulse'>Delete</button></td>
+                            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button onClick={() => handleDelete(report)} className='btn btn-error hover:animate-pulse'>Delete</button></td>
                         </tr>)
                     }
                 </tbody>
