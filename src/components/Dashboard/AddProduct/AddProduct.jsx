@@ -9,8 +9,8 @@ import Loading from '../../Shared/Loading/Loading';
 const AddProduct = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    
-    const {user} = useContext(AuthContext);
+
+    const { user } = useContext(AuthContext);
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -34,6 +34,8 @@ const AddProduct = () => {
         const category = data.category;
         const useOfYears = data.useOfYears;
         const description = data.description;
+        const phoneNumber = data.phoneNumber;
+        const opinion = data.opinion;
         //for get image
         const image = data.image[0];
         const formData = new FormData();
@@ -44,48 +46,51 @@ const AddProduct = () => {
             method: 'POST',
             body: formData
         })
-        .then(res => res.json())
-        .then(imageData => {
-            if(imageData.success){
-                const picture = imageData.data.url;
-                console.log(picture);
-                const productData = {
-                    sellerName,
-                    location,
-                    resalePirce: resalePrice,
-                    originalPirce: originalPrice,
-                    title,
-                    category,
-                    yearOfUse: useOfYears,
-                    picture,
-                    postTime: today,
-                    email: user?.email,
-                    rating: 5,
-                    description
-                }
-                fetch('http://localhost:5000/products',{
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                    },
-                    body: JSON.stringify(productData)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.acknowledged){
-                        navigate('/')
-                        setIsLoading(false);
+            .then(res => res.json())
+            .then(imageData => {
+                if (imageData.success) {
+                    const picture = imageData.data.url;
+                    console.log(picture);
+                    const productData = {
+                        sellerName,
+                        location,
+                        resalePirce: resalePrice,
+                        originalPirce: originalPrice,
+                        title,
+                        category,
+                        yearOfUse: useOfYears,
+                        picture,
+                        postTime: today,
+                        email: user?.email,
+                        rating: 5,
+                        description,
+                        phoneNumber,
+                        opinion,
+                        isAdvertise: false
                     }
-                })
-                .catch(err=>{
-                    console.error('add product error', err);
-                })
-            }
-        })
-        .catch(err =>{
-            console.error("imgbb err", err);
-        })
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(productData)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                navigate('/')
+                                setIsLoading(false);
+                            }
+                        })
+                        .catch(err => {
+                            console.error('add product error', err);
+                        })
+                }
+            })
+            .catch(err => {
+                console.error("imgbb err", err);
+            })
 
     }
     return (
@@ -175,11 +180,22 @@ const AddProduct = () => {
                                     <input
                                         class="w-full rounded-lg border-gray-200 p-3 text-sm"
                                         placeholder="Use of years"
-                                        type="number"
+                                        type="text"
                                         id="useOfYears"
                                         {...register('useOfYears', { required: true })}
                                     />
                                     {errors.useOfYears && <span className='text-red-500'>This field is required</span>}
+                                </div>
+                                <div>
+                                    <label class="sr-only" for="phone">Seller Number</label>
+                                    <input
+                                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                                        placeholder="My Number"
+                                        type="number"
+                                        id="useOfYears"
+                                        {...register('sellerNumber', { required: true })}
+                                    />
+                                    {errors.sellerNumber && <span className='text-red-500'>This field is required</span>}
                                 </div>
                                 <div>
                                     <label
@@ -201,6 +217,26 @@ const AddProduct = () => {
                                         }
                                     </select>
                                     {errors.category && <span className='text-red-600'>This field is required</span>}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor="category"
+                                        className="sr-only"
+                                    >
+                                        What is your Opinion?
+                                    </label>
+
+                                    <select
+                                        name="category"
+                                        className="select select-bordered w-full max-w-xs"
+                                        {...register('opinion', { required: true })}
+                                    >
+                                        <option disabled selected>What is your Opinion?</option>
+                                        <option value='Excellent'>Excellent</option>
+                                        <option value='Good'>Good</option>
+                                        <option value='Fair'>Fair</option>
+                                    </select>
+                                    {errors.opinion && <span className='text-red-600'>This field is required</span>}
                                 </div>
                             </div>
 

@@ -27,9 +27,9 @@ const MyProducts = () => {
         .then(data =>{
             if(data.deletedCount > 0){
                 toast.success('My Product deleted Successfull')
-                refetch()
+                handleDeleteFromAdvertise(product._id)
+                refetch();
             }
-            console.log();
         })
         .catch(err => console.error('my product deleted error', err));
     }
@@ -39,6 +39,7 @@ const MyProducts = () => {
             ...product,
             productId: product._id,
             email: user?.email || 'unauthorization',
+            status: "available",
 
         }
         delete advertiseProductData._id
@@ -54,12 +55,32 @@ const MyProducts = () => {
         .then(data => {
             if(data.acknowledged){
                 toast.success('Your Product Advertise is Running Pay for Advertise')
+                refetch()
+            }else{
+                toast.error(data.message)
             }
-            console.log(data);
         })
         .catch(err => {
             console.error('advertise post error', err);
         })
+    }
+
+    const handleDeleteFromAdvertise = id =>{
+        console.log(id);
+        fetch(`http://localhost:5000/advertise/${id}`,{
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.deletedCount > 0){
+                toast.success('advertise product is deleted')
+                refetch()
+            }
+        })
+        .catch(err => console.error('advertise delete error', err))
     }
     return (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
@@ -111,7 +132,7 @@ const MyProducts = () => {
                         </div>
                         <div className='mt-6 grid grid-cols-2 gap-8'>
                             <button onClick={()=>handleDelete(product)} className='btn btn-sm btn-error text-white'>delete</button>
-                            <button onClick={()=> handleAdvertise(product)} className='btn btn-sm btn-primary text-white'>Advertise</button>
+                            <button onClick={()=> handleAdvertise(product)} className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Running Ads" : "Advertise"}</button>
                         </div>
                     </div>
                 </div>)

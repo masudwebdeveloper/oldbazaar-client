@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import './SecondHandProducts.css';
 
 const SecondHandProducts = () => {
+    const [secondProducts, setSecondProducts] = useState([]);
+    const [size, setSize] = useState(8);
+    const [page, setPage] = useState(0);
+    const [count, setCount] = useState(0);
+
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -12,14 +18,16 @@ const SecondHandProducts = () => {
         }
     })
 
-    const { data: secondProducts = [] } = useQuery({
-        queryKey: ['products'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/products');
-            const data = await res.json();
-            return data;
-        }
-    })
+    const pages = Math.ceil(count / size);
+    useEffect(() => {
+        fetch(`http://localhost:5000/products?size=${size}&page=${page}`)
+            .then(res => res.json())
+            .then(data => {
+                setSecondProducts(data.products)
+                setCount(data.count);
+            })
+    }, [page, size])
+
     return (
         <section className='mx-auto max-w-screen-xl px-4 py-8'>
             <div>
@@ -85,6 +93,17 @@ const SecondHandProducts = () => {
                     </div>
                 </section>
 
+            </div>
+            <div className='pagination text-center mt-10'>
+                {
+                    [...Array(pages).keys()].map(number => <button
+                        key={Number}
+                        className={page === number ? 'btn btn-md btn-warning' : 'btn btn-sm'}
+                        onClick={() => setPage(number)}
+                    >
+                        {number + 1}
+                    </button>)
+                }
             </div>
 
         </section>

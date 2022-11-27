@@ -20,7 +20,6 @@ const BookingModal = ({ product, setOption}) => {
             buyerName: user?.displayName,
             sellerName,
             productName: title,
-            treatMent: "name",
             email: user?.email || 'Unauthorized',
             phone,
             picture,
@@ -58,7 +57,7 @@ const BookingModal = ({ product, setOption}) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">name</h3>
+                    <h3 className="text-lg font-bold">{title}</h3>
                     <form onSubmit={handleAppointment} className='grid grid-cols-1 gap-y-5 mt-10'>
                         <input name='date' type="text" value={date} disabled className="input input-bordered w-full" />
                         <input name='name' type="text" placeholder="your name" className="input input-bordered w-full" defaultValue={user?.displayName} required />

@@ -1,18 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const MyBookingProducts = () => {
     const { user } = useContext(AuthContext);
-    const {data: mybookings= []} = useQuery({
+    const { data: mybookings = [] } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`,{
+            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
-                
+
             })
             const data = await res.json();
             return data;
@@ -72,7 +73,7 @@ const MyBookingProducts = () => {
                                     <div className="w-16 rounded">
                                         <PhotoProvider>
                                             <PhotoView src={product?.picture}>
-                                            <img src={product?.picture} alt="Tailwind-CSS-Avatar-component" />
+                                                <img src={product?.picture} alt="Tailwind-CSS-Avatar-component" />
                                             </PhotoView>
                                         </PhotoProvider>
                                     </div>
@@ -81,7 +82,14 @@ const MyBookingProducts = () => {
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{product?.bookingDate}</strong></td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{product?.price} $</strong></td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{product?.buyerName}</strong></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-secondary'>Pay Now</button></td>
+                            {
+                                product?.price && !product.paid && <Link to={`/dashboard/payment/${product._id}`}>
+                                    <td class="whitespace-nowrap px-4 pt-5 text-gray-700"><button className='btn btn-sm btn-secondary'>Pay Now</button></td>
+                                </Link>
+                            }
+                            {
+                                product?.price && product.paid && <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-secondary' disabled>Paid</button></td>
+                            }
                         </tr>)
                     }
                 </tbody>

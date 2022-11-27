@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AdvertisePage = () => {
     const { data: adveritse = [] } = useQuery({
@@ -28,7 +29,7 @@ const AdvertisePage = () => {
                 <div class="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-4">
 
                     {
-                        adveritse.map(product => <a href="#" class="relative block border border-gray-100">
+                        adveritse.map(product => <a href='/' class="relative block border border-gray-100">
                             <button
                                 type="button"
                                 class="absolute right-4 top-4 rounded-full bg-black p-2 text-white"
@@ -57,15 +58,23 @@ const AdvertisePage = () => {
                             />
 
                             <div class="p-6">
-                                <p class="text-sm font-medium text-gray-600">$14.99</p>
+                                <p class="text-sm font-medium text-gray-900 bg-orange-400">Resale Price: {product.resalePirce}</p>
+                                <p class="text-sm font-medium text-gray-600 underline decoration-amber-400">Original Price: {product.originalPirce}</p>
 
-                                <h3 class="mt-1 text-lg font-bold">Robot Toy</h3>
+                                <h3 class="mt-1 text-lg font-bold">PhoneName: {product.title}</h3>
+                                <div className='flex '>
+                                    <h4>sellerName: {product.sellerName}</h4>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600 ml-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                    </svg>
 
+                                </div>
+                                <h3 className='mt-1 text-sm font-semibold'>{product?.status}</h3>
                                 <button
                                     type="button"
                                     class="mt-4 flex w-full items-center justify-center rounded-sm bg-yellow-500 px-8 py-4"
                                 >
-                                    <span class="text-sm font-medium"> Add to Cart </span>
+                                    <Link to={`/details/${product.productId}`} class="text-sm font-medium">See Details</Link>
 
                                     <svg
                                         class="ml-1.5 h-5 w-5"
@@ -85,12 +94,6 @@ const AdvertisePage = () => {
                             </div>
                         </a>)
                     }
-                </div>
-
-                <div class="mt-4 text-center">
-                    <button type="button" class="text-xs text-gray-500 underline">
-                        Clear Recently Viewed
-                    </button>
                 </div>
             </div>
         </section>
