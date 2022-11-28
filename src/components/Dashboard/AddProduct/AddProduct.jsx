@@ -66,7 +66,10 @@ const AddProduct = () => {
                         description,
                         phoneNumber,
                         opinion,
-                        isAdvertise: false
+                        isAdvertise: '',
+                        paid: false,
+                        status: 'availabe',
+                        isVerified: true
                     }
                     fetch('http://localhost:5000/products', {
                         method: 'POST',
@@ -79,7 +82,7 @@ const AddProduct = () => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
-                                navigate('/')
+                                navigate('/dashboard/myproducts')
                                 setIsLoading(false);
                             }
                         })
@@ -95,24 +98,25 @@ const AddProduct = () => {
     }
     return (
         <section class="bg-gray-100">
-            <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-                    <div class="lg:col-span-2 lg:py-12">
-                        <p class="max-w-xl text-lg">
-                            At the same time, the fact that we are wholly owned and totally
-                            independent from manufacturer and other group control gives you
-                            confidence that we will only recommend what is right for you.
-                        </p>
-
-                        <div class="mt-8">
+                    <div class="lg:col-span-2">
+                        <div class="mt-8 text-center">
+                            <a href="" class="text-6xl font-bold text-pink-700">
+                                <div className='w-12 h-12 rounded-full text-6xl border-dashed animate-spin border-4 border-orange-400 ml-10'></div>LDB<span className='text-pink-500'>azaar</span>
+                            </a> <br />
                             <a href="" class="text-2xl font-bold text-pink-600">
-                                0151 475 4450
+                                Sell your old phone and be happy
                             </a>
 
                             <address class="mt-2 not-italic">
-                                282 Kevin Brook, Imogeneborough, CA 58517
+                                Message: <strong>Provide all the details correctly</strong>
                             </address>
                         </div>
+                        <img src="https://i.pcmag.com/imagery/lineups/02hOB8SkvCC7nUU4C9v3VQP-1.fit_lim.size_768x432.v1569492844.jpg" alt="" />
+                        <img src="https://i.dawn.com/primary/2021/08/6118938e06547.png" alt="" />
+
+
                     </div>
 
                     <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">

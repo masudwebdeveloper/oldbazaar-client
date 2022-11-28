@@ -199,6 +199,7 @@ const ProductsDetails = () => {
                                         type="button"
                                         class={`rounded-full ${wishlist ? 'bg-red-600' : 'bg-black'} p-2 text-white animate-bounce`}
                                         title='Wishlist'
+                                        disabled={isSeller || isAdmin}
                                         onClick={() => handleWishlist(product)}
                                     >
                                         <span class="sr-only">Wishlist</span>
@@ -207,6 +208,7 @@ const ProductsDetails = () => {
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
+                                            
                                             xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <path
@@ -221,6 +223,7 @@ const ProductsDetails = () => {
                                         type="button"
                                         class={`rounded-full bg-black p-2 text-white animate-bounce`}
                                         title='Report'
+                                        disabled={isSeller || isAdmin}
                                         onClick={() => handleReport(product)}
                                     >
                                         <span class="sr-only">Report</span>

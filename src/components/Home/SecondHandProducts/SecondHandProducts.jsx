@@ -83,15 +83,29 @@ const SecondHandProducts = () => {
                                         className="-mt-3 h-96 w-full object-cover p-3"
                                     />
 
-                                    <h3 className="mt-4 ml-3 font-bold text-sm text-black/90">
+                                    <h3 className="mt-1 ml-3 font-bold text-sm text-black/90">
                                         {singleProduct.title}
                                     </h3>
 
-                                    <div className="mt-4 flex items-center justify-between font-bold p-3">
+                                    <div className="mt-4 flex items-center justify-between font-bold px-3">
                                         <p className="text-lg">${singleProduct?.resalePirce}</p>
 
                                         <p className="text-xs uppercase tracking-wide">{singleProduct?.status}</p>
                                     </div>
+                                    <div className='flex'>
+
+                                        <div className='ml-3'>
+                                            <h3 className="mt-4 text-md font-bold">SellerName: {singleProduct?.sellerName}</h3>
+                                            <p className="mt-2 text-sm text-gray-700">Location: {singleProduct?.location}</p>
+                                            <p className="mt-2 text-sm text-gray-700">Date: {singleProduct?.postTime}</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="mt-4 block w-full hover:rounded-full duration-500 rounded-lg bg-warning text-white p-4 text-sm font-medium"
+                                    >
+                                        View Details
+                                    </button>
                                 </Link>)
                             }
 

@@ -10,7 +10,7 @@ const About = () => {
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
                     <img
                         alt="Office"
-                        src="https://media.istockphoto.com/id/1342439538/photo/happy-man-drinking-checking-his-cell-phone-at-a-coffee-shop-while-drinking-a-cappuccino.jpg?s=612x612&w=0&k=20&c=wbDiCdUcAGuhoT-vusBHymFu08nZUYYL9dSTV5iy8zE="
+                        src="https://www.cellularport.com/wp-content/uploads/2020/11/1600x700-Banner-2.jpg"
                         class="h-56 w-full object-cover"
                     />
 
@@ -56,7 +56,7 @@ const About = () => {
                 <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
                     <img
                         alt="Office"
-                        src="https://media.istockphoto.com/id/1388450694/photo/smiling-woman-using-mobile-phone-in-the-bedroom.jpg?s=612x612&w=0&k=20&c=CuIyXzX4HVROBxFV3jsG8L3YA2YGOmhqeTO6uV5yido="
+                        src="https://sell.reboxed.co/img/rbxd_sell-og.png"
                         class="h-56 w-full object-cover"
                     />
 

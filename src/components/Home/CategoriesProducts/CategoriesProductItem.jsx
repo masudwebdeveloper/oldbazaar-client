@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CategoriesProductItem = ({ category }) => {
-    const { title, resalePirce, picture, _id } = category;
+    const { title, resalePirce, picture, _id, originalPirce, sellerName, location, postTime, status } = category;
     return (
         <div>
             <Link to={`/details/${_id}`} className="relative block border border-gray-300 rounded-md p-5">
@@ -34,19 +34,27 @@ const CategoriesProductItem = ({ category }) => {
                 />
 
                 <div className="p-6">
-                    <strong className="inline-block bg-yellow-400 px-3 py-1 text-xs font-medium">
-                        New
-                    </strong>
 
-                    <h3 className="mt-4 text-lg font-bold">{title}</h3>
+                    <div className='flex'>
+                        <div>
+                            <h3 className="mt-4 text-lg font-bold">{title}</h3>
+                            <p className="mt-2 text-sm text-gray-700">ResalePrice: ${resalePirce}</p>
+                            <p className="mt-2 text-sm text-gray-700">OriginalPrice: ${originalPirce}</p>
+                        </div>
+                        <div className='ml-3'>
+                            <h3 className="mt-4 text-md font-bold">SellerName: {sellerName}</h3>
+                            <p className="mt-2 text-sm text-gray-700">Location: {location}</p>
+                            <p className="mt-2 text-sm text-gray-700">Date: {postTime}</p>
+                        </div>
+                    </div>
 
-                    <p className="mt-2 text-sm text-gray-700">${resalePirce}</p>
+
 
                     <button
                         type="button"
-                        className="mt-4 block w-full rounded-sm bg-secondary text-white p-4 text-sm font-medium"
+                        className="mt-4 hover:rounded-full duration-500 block w-full rounded-sm bg-secondary text-white p-4 text-sm font-medium"
                     >
-                        Buy Now
+                        View Details
                     </button>
                 </div>
             </Link>

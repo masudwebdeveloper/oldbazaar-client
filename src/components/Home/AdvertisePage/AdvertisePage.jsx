@@ -29,7 +29,7 @@ const AdvertisePage = () => {
                 <div class="mt-8 grid grid-cols-1 gap-x-4 gap-y-8 lg:grid-cols-4">
 
                     {
-                        adveritse.map(product => <a href='/' class="relative block border border-gray-100">
+                        adveritse.map(product => <a href='#' class="relative block border border-gray-100">
                             <button
                                 type="button"
                                 class="absolute right-4 top-4 rounded-full bg-black p-2 text-white"
@@ -74,7 +74,7 @@ const AdvertisePage = () => {
                                     type="button"
                                     class="mt-4 flex w-full items-center justify-center rounded-sm bg-yellow-500 px-8 py-4"
                                 >
-                                    <Link to={`/details/${product.productId}`} class="text-sm font-medium">See Details</Link>
+                                    <Link to={`/details/${product.productId}`} class="text-sm hover:rounded-full duration-500 font-medium">See Details</Link>
 
                                     <svg
                                         class="ml-1.5 h-5 w-5"
