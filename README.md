@@ -1,7 +1,10 @@
 # This is OLDBazaar website for oldest phone
 
 This project live link :- [OLDBazaar]().
-server side link :- [server_side_link]()
+server side link :- [server_side_link]();
+
+** admin email: web@ph.com
+** admin password: 123456
 
 ## This side is features
 * this side is very user firendly - and very fast rendering
