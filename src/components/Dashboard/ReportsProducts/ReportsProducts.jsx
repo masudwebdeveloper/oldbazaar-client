@@ -10,7 +10,7 @@ const ReportsProducts = () => {
     const { data: reports = [], refetch } = useQuery({
         queryKey: ['wishlist'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/report`);
+            const res = await fetch(`https://old-bazaar-server.vercel.app/report`);
             const data = await res.json();
             return data;
         }
@@ -19,7 +19,7 @@ const ReportsProducts = () => {
     const handleDelete = product => {
         const procceed = window.confirm(`Are you sure. do you want delete ${product?.title}`)
         if (procceed) {
-            fetch(`http://localhost:5000/reportproduct/${product.productId}`, {
+            fetch(`https://old-bazaar-server.vercel.app/reportproduct/${product.productId}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -29,7 +29,7 @@ const ReportsProducts = () => {
                 .then(data => {
                     if (data.deletedCount > 0) {
                         handleReportDelete(product._id)
-                        
+
                     }
                 })
                 .catch(err => {
@@ -39,24 +39,24 @@ const ReportsProducts = () => {
 
     }
 
-    const handleReportDelete = id =>{
+    const handleReportDelete = id => {
         console.log(id);
-        fetch(`http://localhost:5000/reportproductdelete/${id}`,{
+        fetch(`https://old-bazaar-server.vercel.app/reportproductdelete/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                toast.success('Reported product deleted sucessfull');
-                refetch();
-            }
-        })
-        .catch(err => {
-            console.error('hadleReport Delete error', err);
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('Reported product deleted sucessfull');
+                    refetch();
+                }
+            })
+            .catch(err => {
+                console.error('hadleReport Delete error', err);
+            })
     }
     return (
         <div class="overflow-x-auto">

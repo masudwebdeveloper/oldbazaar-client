@@ -62,7 +62,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, role) => {
         const userInfo = { name, email, role };
-        fetch('http://localhost:5000/users', {
+        fetch('https://old-bazaar-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -109,7 +109,7 @@ const SignUp = () => {
                         </h2>
 
                         <p className="mt-4 leading-relaxed text-white/90">
-                        No one has the power to shatter your dreams unless you give it to them.
+                            No one has the power to shatter your dreams unless you give it to them.
                         </p>
                     </div>
                 </section>
@@ -145,7 +145,7 @@ const SignUp = () => {
                             </h1>
 
                             <p className="mt-4 leading-relaxed text-gray-500">
-                            No one has the power to shatter your dreams unless you give it to them.
+                                No one has the power to shatter your dreams unless you give it to them.
                             </p>
                         </div>
 

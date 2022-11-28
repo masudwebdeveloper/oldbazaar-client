@@ -32,7 +32,7 @@ const BookingModal = ({ product, setOption }) => {
             status: 'booked'
 
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://old-bazaar-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -69,7 +69,7 @@ const BookingModal = ({ product, setOption }) => {
                     <h3 className="text-md font-bold">Price: {resalePirce}$</h3>
                     <form onSubmit={handleAppointment} className='grid grid-cols-1 gap-y-5 mt-10'>
                         <input name='date' type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
-                        <input name='location' type="text" placeholder="your location" className="input input-bordered w-full"/>
+                        <input name='location' type="text" placeholder="your location" className="input input-bordered w-full" />
                         <input name='email' defaultValue={user?.email} type="email" placeholder="your email" disabled className="input input-bordered w-full" required />
                         <input name='price' min='11' max='15' type="text" placeholder="your phone number" className="input input-bordered w-full" defaultValue={resalePirce} disabled required />
                         <input name='phone' min='11' max='15' type="text" placeholder="your phone number" className="input input-bordered w-full" required />

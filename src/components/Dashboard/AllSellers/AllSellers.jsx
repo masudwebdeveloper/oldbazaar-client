@@ -4,7 +4,7 @@ import axios from 'axios';
 const AllSellers = () => {
     const [allSellers, setSellers] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/allsellers')
+        axios.get('https://old-bazaar-server.vercel.app/allsellers')
             .then(data => {
                 setSellers(data.data)
             })

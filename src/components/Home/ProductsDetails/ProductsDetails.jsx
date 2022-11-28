@@ -21,7 +21,7 @@ const ProductsDetails = () => {
             productId: product._id
         }
         delete wishlistProduct._id;
-        fetch(`http://localhost:5000/wishlist`, {
+        fetch(`https://old-bazaar-server.vercel.app/wishlist`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -53,7 +53,7 @@ const ProductsDetails = () => {
             report: "Reported"
         }
         delete reportProduct._id;
-        fetch(`http://localhost:5000/report`, {
+        fetch(`https://old-bazaar-server.vercel.app/report`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -208,7 +208,7 @@ const ProductsDetails = () => {
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
-                                            
+
                                             xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <path

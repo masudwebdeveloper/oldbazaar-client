@@ -45,12 +45,12 @@ const router = createBrowserRouter([
             {
                 path: '/categories/:id',
                 element: <PrivateRoute><CategoriesProducts></CategoriesProducts></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/categories/${params.id}`)
             },
             {
                 path: '/details/:id',
                 element: <ProductsDetails></ProductsDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/products/${params.id}`)
             },
             {
                 path: '/signup',
@@ -107,9 +107,9 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/bookings/${params.id}`)
             },
-            
+
         ]
     }
 ])

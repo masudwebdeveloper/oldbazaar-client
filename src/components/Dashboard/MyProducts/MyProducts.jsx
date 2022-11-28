@@ -10,31 +10,31 @@ const MyProducts = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproducts?email=${user?.email}`);
+            const res = await fetch(`https://old-bazaar-server.vercel.app/myproducts?email=${user?.email}`);
             const data = await res.json();
             return data;
         }
     })
 
-    const handleDelete = product =>{
-        fetch(`http://localhost:5000/myproducts/${product._id}`, {
+    const handleDelete = product => {
+        fetch(`https://old-bazaar-server.vercel.app/myproducts/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.deletedCount > 0){
-                toast.success('My Product deleted Successfull')
-                handleDeleteFromAdvertise(product._id)
-                refetch();
-            }
-        })
-        .catch(err => console.error('my product deleted error', err));
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('My Product deleted Successfull')
+                    handleDeleteFromAdvertise(product._id)
+                    refetch();
+                }
+            })
+            .catch(err => console.error('my product deleted error', err));
     }
 
-    const handleAdvertise = product =>{
+    const handleAdvertise = product => {
         const advertiseProductData = {
             ...product,
             productId: product._id,
@@ -42,7 +42,7 @@ const MyProducts = () => {
             isAdvertise: true
         }
         delete advertiseProductData._id
-        fetch('http://localhost:5000/advertise',{
+        fetch('https://old-bazaar-server.vercel.app/advertise', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -50,36 +50,36 @@ const MyProducts = () => {
             },
             body: JSON.stringify(advertiseProductData)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.acknowledged){
-                toast.success('Your Product Advertise is Running Pay for Advertise')
-                refetch()
-            }else{
-                toast.error(data.message)
-            }
-        })
-        .catch(err => {
-            console.error('advertise post error', err);
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Your Product Advertise is Running Pay for Advertise')
+                    refetch()
+                } else {
+                    toast.error(data.message)
+                }
+            })
+            .catch(err => {
+                console.error('advertise post error', err);
+            })
     }
 
-    const handleDeleteFromAdvertise = id =>{
+    const handleDeleteFromAdvertise = id => {
         console.log(id);
-        fetch(`http://localhost:5000/advertise/${id}`,{
+        fetch(`https://old-bazaar-server.vercel.app/advertise/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                toast.success('advertise product is deleted')
-                refetch()
-            }
-        })
-        .catch(err => console.error('advertise delete error', err))
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('advertise product is deleted')
+                    refetch()
+                }
+            })
+            .catch(err => console.error('advertise delete error', err))
     }
     return (
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
@@ -130,9 +130,9 @@ const MyProducts = () => {
                             </div>
                         </div>
                         <div className='mt-6 grid grid-cols-2 gap-8'>
-                            <button onClick={()=>handleDelete(product)} className='btn btn-sm btn-error text-white'>delete</button>
+                            <button onClick={() => handleDelete(product)} className='btn btn-sm btn-error text-white'>delete</button>
                             {
-                                product.status === 'available' && <button onClick={()=> handleAdvertise(product)} className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Running Ads" : "Advertise"}</button>
+                                product.status === 'available' && <button onClick={() => handleAdvertise(product)} className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Running Ads" : "Advertise"}</button>
                             }
                             {
                                 product?.status === 'booked' && <button disabled className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Advertise" : "Running Ads"}</button>

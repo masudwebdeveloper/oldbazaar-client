@@ -26,7 +26,7 @@ const SocialLogin = () => {
                         email: user?.email,
                         role: 'Buyer'
                     };
-                    fetch('http://localhost:5000/users', {
+                    fetch('https://old-bazaar-server.vercel.app/users', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -41,7 +41,7 @@ const SocialLogin = () => {
                             } else {
                                 // setCreateUserEmail(user?.email);
                                 toast.error(data.message)
-                                navigate(from, {replace: true})
+                                navigate(from, { replace: true })
                             }
                         })
                         .catch(err => {

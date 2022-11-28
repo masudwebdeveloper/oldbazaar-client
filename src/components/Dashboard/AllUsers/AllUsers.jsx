@@ -6,7 +6,11 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://old-bazaar-server.vercel.app/users', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -14,7 +18,7 @@ const AllUsers = () => {
 
     //for user delete function rechieve id 
     const handleUserDelete = user => {
-        fetch(`http://localhost:5000/users/${user?._id}`, {
+        fetch(`https://old-bazaar-server.vercel.app/users/${user?._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -32,7 +36,7 @@ const AllUsers = () => {
     // give super power for special person so be care full
     const handleUserMakeAdmin = user => {
         console.log(user._id);
-        fetch(`http://localhost:5000/users/admin/${user?._id}`, {
+        fetch(`https://old-bazaar-server.vercel.app/users/admin/${user?._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

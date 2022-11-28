@@ -16,7 +16,7 @@ const SecondHandProducts = () => {
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://old-bazaar-server.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -24,7 +24,7 @@ const SecondHandProducts = () => {
 
     const pages = Math.ceil(count / size);
     useEffect(() => {
-        fetch(`http://localhost:5000/products?size=${size}&page=${page}`)
+        fetch(`https://old-bazaar-server.vercel.app/products?size=${size}&page=${page}`)
             .then(res => res.json())
             .then(data => {
                 setSecondProducts(data.products)
