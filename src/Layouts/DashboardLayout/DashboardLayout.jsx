@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import MyProducts from '../../components/Dashboard/MyProducts/MyProducts';
 import Navbar from '../../components/Shared/Navbar/Navbar';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useRole from '../../hooks/useRole';

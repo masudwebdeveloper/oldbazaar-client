@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../../hooks/useToken';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 
 const SignUp = () => {
@@ -104,11 +105,11 @@ const SignUp = () => {
                         </a>
 
                         <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                            Welcome to OldBazaar 🦑
+                            Welcome to OLDBazaar 🦑
                         </h2>
 
                         <p className="mt-4 leading-relaxed text-white/90">
-                        a market as in the Middle East consisting of rows of shops or stalls selling miscellaneous goods. a fair for the sale of articles especially for charitable purposes.
+                        No one has the power to shatter your dreams unless you give it to them.
                         </p>
                     </div>
                 </section>
@@ -138,14 +139,13 @@ const SignUp = () => {
                             </a>
 
                             <h1
-                                className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl"
+                                className="mt-2 text-xl font-bold text-gray-900 sm:text-3xl md:text-4xl"
                             >
-                                Welcome to Squid 🦑
+                                Welcome to OLDBazaar 🦑
                             </h1>
 
                             <p className="mt-4 leading-relaxed text-gray-500">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-                                nam dolorum aliquam, quibusdam aperiam voluptatum.
+                            No one has the power to shatter your dreams unless you give it to them.
                             </p>
                         </div>
 
@@ -303,6 +303,7 @@ const SignUp = () => {
                                 </p>
                             </div>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </main>
             </div>

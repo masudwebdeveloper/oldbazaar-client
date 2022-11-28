@@ -88,7 +88,7 @@ const MyBookingProducts = () => {
                                 </Link>
                             }
                             {
-                                product?.price && product.paid && <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-secondary' disabled>Paid</button></td>
+                                product?.price && product.paid && <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-sm btn-success' disabled>Paid</button></td>
                             }
                         </tr>)
                     }

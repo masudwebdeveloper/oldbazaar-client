@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useRole from '../../../hooks/useRole';
 import BookingModal from '../BookingModal/BookingModal';
 
 
@@ -9,8 +10,9 @@ const ProductsDetails = () => {
     const product = useLoaderData();
     const [option, setOption] = useState(true);
     const { user } = useContext(AuthContext);
-    const { _id, title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
-    const wishlist = localStorage.getItem(`${_id}`)
+    const { _id, title, resalePirce, originalPirce, sellerName, picture, yearOfUse, postTime, location, description, status } = product;
+    const wishlist = localStorage.getItem(`${_id}`);
+    const [isAdmin, isSeller] = useRole(user?.email)
     const handleWishlist = product => {
 
         const wishlistProduct = {
@@ -186,7 +188,8 @@ const ProductsDetails = () => {
                                 <label
                                     type="submit"
                                     htmlFor="booking-modal"
-                                    class="w-full rounded bg-red-700 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white"
+                                    disabled={isSeller || isAdmin}
+                                    class={`w-full btn rounded px-6 bg-primary py-3 text-sm font-bold uppercase tracking-wide text-white`}
                                 >
                                     Buy Now
                                 </label>

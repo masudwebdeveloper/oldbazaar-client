@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import useToken from '../../../hooks/useToken';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 
 
@@ -13,8 +14,10 @@ const Login = () => {
     const [token] = useToken(createUserEmail);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    if(token){
-        navigate('/')
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    if (token) {
+        navigate(from, {replace: true})
     }
     const handleLogin = data => {
         const email = data.email;
@@ -36,11 +39,11 @@ const Login = () => {
         <section className="relative flex flex-wrap lg:h-screen lg:items-center my-10">
             <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
                 <div className="mx-auto max-w-lg text-center">
-                    <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
+                    <h1 className="text-2xl font-bold sm:text-3xl">Get started today! With</h1>
+                    <h1 className="text-2xl font-bold sm:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">Welcome to OLDBazaar</h1>
 
                     <p className="mt-4 text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla
-                        eaque error neque ipsa culpa autem, at itaque nostrum!
+                        No one has the power to shatter your dreams unless you give it to them.
                     </p>
                 </div>
 
@@ -127,6 +130,7 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
+                <SocialLogin></SocialLogin>
             </div>
 
             <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">

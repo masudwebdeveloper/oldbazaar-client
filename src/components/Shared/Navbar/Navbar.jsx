@@ -24,7 +24,7 @@ const Navbar = () => {
 
                             <ul tabIndex="1" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><Link to='/'>Home</Link></li>
-                                <li><Link to='/about'>About</Link></li>
+                                <li><Link to='/blogs'>Blogs</Link></li>
                                 <li><Link to='/myReview'>My Review</Link></li>
                                 <li><Link to='/appointment'>Appointments</Link></li>
                                 <li><Link to='/contact'>Contact</Link></li>
@@ -69,9 +69,9 @@ const Navbar = () => {
                             </Link>
 
                             <Link
-                                to="/about"
+                                to="/blogs"
                                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
-                                About
+                                Blogs
                             </Link>
 
                             <Link

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
-const BookingModal = ({ product, setOption}) => {
+const BookingModal = ({ product, setOption }) => {
     const { _id, title, resalePirce, category, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
     const { user } = useContext(AuthContext)
     const today = new Date();
@@ -14,6 +14,7 @@ const BookingModal = ({ product, setOption}) => {
         event.preventDefault();
         const form = event.target;
         const phone = form.phone.value;
+        const buyerLocation = form.location.value;
         const booking = {
             productId: _id,
             bookingDate: date,
@@ -25,6 +26,8 @@ const BookingModal = ({ product, setOption}) => {
             picture,
             category,
             price: resalePirce,
+            buyerLocation,
+
         }
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -58,10 +61,12 @@ const BookingModal = ({ product, setOption}) => {
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">{title}</h3>
+                    <h3 className="text-md font-bold">Price: {resalePirce}$</h3>
                     <form onSubmit={handleAppointment} className='grid grid-cols-1 gap-y-5 mt-10'>
-                        <input name='date' type="text" value={date} disabled className="input input-bordered w-full" />
-                        <input name='name' type="text" placeholder="your name" className="input input-bordered w-full" defaultValue={user?.displayName} required />
+                        <input name='date' type="text" value={user?.displayName} disabled className="input input-bordered w-full" />
+                        <input name='location' type="text" placeholder="your location" className="input input-bordered w-full"/>
                         <input name='email' defaultValue={user?.email} type="email" placeholder="your email" disabled className="input input-bordered w-full" required />
+                        <input name='price' min='11' max='15' type="text" placeholder="your phone number" className="input input-bordered w-full" defaultValue={resalePirce} disabled required />
                         <input name='phone' min='11' max='15' type="text" placeholder="your phone number" className="input input-bordered w-full" required />
                         <input type="submit" value="Submit" className='w-full btn-accent py-2 font-bold text-2xl rounded-lg' required />
                     </form>

@@ -5,7 +5,9 @@ import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     updateProfile,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
 } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 
@@ -16,6 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -24,6 +27,11 @@ const AuthProvider = ({ children }) => {
 
     const updateUserProfile = userProfile => {
         return updateProfile(auth.currentUser, userProfile);
+    }
+
+    const googleSignIn = () =>{
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
     }
 
     useEffect(() => {
@@ -47,7 +55,9 @@ const AuthProvider = ({ children }) => {
         user,
         login,
         logOut,
+        loading,
         createUser,
+        googleSignIn,
         updateUserProfile
     }
     return (

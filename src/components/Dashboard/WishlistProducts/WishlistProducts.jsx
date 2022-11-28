@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const WishlistProducts = () => {
@@ -68,7 +69,7 @@ const WishlistProducts = () => {
                                     <div className="w-16 rounded">
                                         <PhotoProvider>
                                             <PhotoView src={wishlist.picture}>
-                                            <img src={wishlist.picture} alt="Tailwind-CSS-Avatar-component" />
+                                                <img src={wishlist.picture} alt="Tailwind-CSS-Avatar-component" />
                                             </PhotoView>
                                         </PhotoProvider>
                                     </div>
@@ -77,7 +78,14 @@ const WishlistProducts = () => {
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{wishlist.yearOfUse}</strong></td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{wishlist?.resalePirce} $</strong></td>
                             <td class="whitespace-nowrap px-4 py-2 text-gray-700"><strong>{wishlist?.originalPirce} $</strong></td>
-                            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-secondary'>Pay Now</button></td>
+                            {
+                                wishlist?.resalePirce && !wishlist.paid && <Link to=''>
+                                    <td class="whitespace-nowrap px-4 pt-5 text-gray-700"><button className='btn btn-sm btn-secondary btn-disabled'>Pay Now</button></td>
+                                </Link>
+                            }
+                            {
+                                wishlist?.price && wishlist.paid && <td class="whitespace-nowrap px-4 py-2 text-gray-700"><button className='btn btn-sm btn-success' disabled>Paid</button></td>
+                            }
                         </tr>)
                     }
                 </tbody>

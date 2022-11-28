@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import './SecondHandProducts.css';
+import { format } from 'date-fns';
 
 const SecondHandProducts = () => {
     const [secondProducts, setSecondProducts] = useState([]);
     const [size, setSize] = useState(8);
     const [page, setPage] = useState(0);
     const [count, setCount] = useState(0);
+
+    const date = new Date();
+    const today = format(date, 'PP');
 
     const { data: categories = [] } = useQuery({
         queryKey: ['categories'],
@@ -58,18 +62,20 @@ const SecondHandProducts = () => {
                         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
 
                             {
-                                secondProducts.map(singleProduct => <Link
+                                secondProducts.map(singleProduct => !singleProduct.paid && <Link
                                     to={`/details/${singleProduct._id}`}
                                     className="block shadow-2xl rounded-lg"
                                     key={singleProduct._id}
                                 >
-                                    <div className="flex justify-center">
-                                        <strong
-                                            className="relative h-6 bg-red-600 px-4 text-xs uppercase leading-6 text-white"
-                                        >
-                                            New
-                                        </strong>
-                                    </div>
+                                    {singleProduct.postTime === today &&
+                                        <div className="flex justify-center">
+                                            <strong
+                                                className="relative h-6 bg-red-600 px-4 text-xs uppercase leading-6 text-white"
+                                            >
+                                                New
+                                            </strong>
+                                        </div>
+                                    }
 
                                     <img
                                         alt="Trainer"
@@ -84,7 +90,7 @@ const SecondHandProducts = () => {
                                     <div className="mt-4 flex items-center justify-between font-bold p-3">
                                         <p className="text-lg">${singleProduct?.resalePirce}</p>
 
-                                        <p className="text-xs uppercase tracking-wide">6 Colors</p>
+                                        <p className="text-xs uppercase tracking-wide">{singleProduct?.status}</p>
                                     </div>
                                 </Link>)
                             }
