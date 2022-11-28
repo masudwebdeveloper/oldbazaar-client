@@ -107,6 +107,7 @@ const CheckOut = ({ bookingProduct }) => {
                 console.error(error);
             })
     }
+    console.log(stripe, clientSecret);
     return (
         <section>
             <h1 class="sr-only">Checkout form</h1>

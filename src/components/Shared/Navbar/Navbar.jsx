@@ -23,14 +23,11 @@ const Navbar = () => {
                             <ul tabIndex="1" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><Link to='/'>Home</Link></li>
                                 <li><Link to='/blogs'>Blogs</Link></li>
-                                <li><Link to='/myReview'>My Review</Link></li>
-                                <li><Link to='/appointment'>Appointments</Link></li>
-                                <li><Link to='/contact'>Contact</Link></li>
                             </ul>
                         </div>
                         {/* dropdown end*/}
                         <div className='text-2xl font-bold mr-10'>
-                           <span className='text-orange-600'>OLDB</span>azaar
+                            <span className='text-orange-600'>OLDB</span>azaar
                         </div>
                         <form className="mb-0 hidden lg:flex">
                             <div className="relative">
@@ -76,7 +73,6 @@ const Navbar = () => {
                         </nav>
                     </div>
                     <div className="flex flex-1 items-center justify-end">
-
 
                         <div className="ml-8 flex items-center justify-end">
                             <div
