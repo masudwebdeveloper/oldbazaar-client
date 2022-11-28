@@ -39,8 +39,7 @@ const MyProducts = () => {
             ...product,
             productId: product._id,
             email: user?.email || 'unauthorization',
-            status: "available",
-
+            isAdvertise: true
         }
         delete advertiseProductData._id
         fetch('http://localhost:5000/advertise',{
@@ -132,7 +131,15 @@ const MyProducts = () => {
                         </div>
                         <div className='mt-6 grid grid-cols-2 gap-8'>
                             <button onClick={()=>handleDelete(product)} className='btn btn-sm btn-error text-white'>delete</button>
-                            <button onClick={()=> handleAdvertise(product)} className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Running Ads" : "Advertise"}</button>
+                            {
+                                product.status === 'available' && <button onClick={()=> handleAdvertise(product)} className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Running Ads" : "Advertise"}</button>
+                            }
+                            {
+                                product?.status === 'booked' && <button disabled className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-primary"}`}>{product?.isAdvertise ? "Advertise" : "Running Ads"}</button>
+                            }
+                            {
+                                product?.status === 'sold' && product?.paid === true && <button className={`btn btn-sm text-white ${product?.isAdvertise ? "btn-error" : "btn-secondary"}`}>{product?.isAdvertise ? "Running Ads" : "Sold"}</button>
+                            }
                         </div>
                     </div>
                 </div>)

@@ -74,35 +74,35 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/allusers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/addproduct',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/wishlist',
-                element: <WishlistProducts></WishlistProducts>
+                element: <BuyerRoute><WishlistProducts></WishlistProducts></BuyerRoute>
             },
             {
                 path: '/dashboard/report',
-                element: <ReportsProducts></ReportsProducts>
+                element: <AdminRoute><ReportsProducts></ReportsProducts></AdminRoute>
             },
             {
                 path: '/dashboard/mybookings',
-                element: <MyBookingProducts></MyBookingProducts>
+                element: <BuyerRoute><MyBookingProducts></MyBookingProducts></BuyerRoute>
             },
             {
                 path: '/dashboard/payment/:id',

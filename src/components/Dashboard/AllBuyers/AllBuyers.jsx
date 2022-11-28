@@ -4,7 +4,11 @@ import axios from 'axios';
 const AllBuyers = () => {
     const [allBuyers, setAllBuyers] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/allbuyers')
+        axios.get('http://localhost:5000/allbuyers',{
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(data => {
                 setAllBuyers(data.data)
             })

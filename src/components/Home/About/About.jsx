@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
 
     return (
-        <div>
+        <div className='px-5'>
             <h1 className='text-4xl hidden lg:block uppercase text-slate-500 mt-10 font-bold text-center'>mobile telephone, also called mobile phone, portable device for connecting to a telecommunications network in order to transmit and receive voice, video, or other data.</h1>
             <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10'>
 

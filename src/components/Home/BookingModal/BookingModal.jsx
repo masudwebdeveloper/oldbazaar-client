@@ -1,11 +1,13 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const BookingModal = ({ product, setOption }) => {
     const { _id, title, resalePirce, category, originalPirce, sellerName, picture, yearOfUse, postTime, location, description } = product;
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const today = new Date();
     const date = format(today, "PP")
 
@@ -27,6 +29,7 @@ const BookingModal = ({ product, setOption }) => {
             category,
             price: resalePirce,
             buyerLocation,
+            status: 'booked'
 
         }
         fetch('http://localhost:5000/bookings', {
@@ -41,11 +44,13 @@ const BookingModal = ({ product, setOption }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('Booking Confirmed')
-                    setOption(false)
+                    setOption(false);
+                    navigate('/dashboard/mybookings')
                     // refetch();
                 } else {
                     toast.error(data.message)
                     setOption(false)
+                    navigate('/')
 
                 }
             })

@@ -4,8 +4,8 @@ const useRole = (email) => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [isSeller, setIsSeller] = useState(false)
     const [isBuyer, setIsBuyer] = useState(false);
-    const [isAdminLoading, setIsAdminLoading] = useState(true);
-    const [isBuyerLoading, setIsBuyerLoading] = useState(false);
+    const [isAdminLoading, setIsAdminLoading] = useState(false);
+    const [isBuyerLoading, setIsBuyerLoading] = useState(true);
     const [isSellerLoading, setIsSellerLoading] = useState(true);
     useEffect(() => {
         if (email) {
@@ -14,7 +14,7 @@ const useRole = (email) => {
                 .then(data => {
                     if (data.role === 'admin') {
                         setIsAdmin(true)
-                        setIsAdminLoading(false)
+                        setIsAdminLoading(true)
                     }
                     if (data.role === 'Seller') {
                         setIsSeller(true)

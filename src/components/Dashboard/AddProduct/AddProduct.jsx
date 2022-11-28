@@ -66,9 +66,9 @@ const AddProduct = () => {
                         description,
                         phoneNumber,
                         opinion,
-                        isAdvertise: '',
+                        isAdvertise: false,
                         paid: false,
-                        status: 'availabe',
+                        status: 'available',
                         isVerified: true
                     }
                     fetch('http://localhost:5000/products', {

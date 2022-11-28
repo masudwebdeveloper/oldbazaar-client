@@ -6,13 +6,15 @@ const AdvertisePage = () => {
     const { data: adveritse = [] } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertise')
+            const res = await fetch('http://localhost:5000/advertise', {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            })
             const data = await res.json();
             return data
         }
     })
     return (
-        <section className='mt-10'>
+        <section>
             <div class="mx-auto max-w-screen-xl px-4 py-8">
                 <div class="relative mx-auto max-w-3xl text-center">
                     <span
@@ -69,7 +71,6 @@ const AdvertisePage = () => {
                                     </svg>
 
                                 </div>
-                                <h3 className='mt-1 text-sm font-semibold'>{product?.status}</h3>
                                 <button
                                     type="button"
                                     class="mt-4 flex w-full items-center justify-center rounded-sm bg-yellow-500 px-8 py-4"

@@ -1,6 +1,10 @@
+import { format } from 'date-fns';
 import React from 'react';
 
 const Footer = () => {
+  const date = new Date();
+  const today = format(date, "PP");
+  const year = today.split(',')[1];
   return (
     <footer aria-label="Site Footer" className="bg-white text-center ">
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
@@ -120,12 +124,9 @@ const Footer = () => {
           </nav>
 
           <p className="mx-auto max-w-lg text-xs text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, natus
-            tempore illo laborum nam, modi quam sequi amet quo quasi impedit iure
-            eum similique pariatur alias exercitationem, porro perspiciatis esse.
-            Corporis odit consequatur sint sequi.
+          You don't have to spend a lot of money on electronics, home furnishings, clothing, or other items you use every day. In fact, you can save a lot of money if you buy a lot of these items in previously-owned condition. 
 
-            <span className="mt-4 block"> &copy; 2022 Saul Goodman </span>
+            <span className="mt-4 block"> &copy; {year} by Masud Rana | alright's resered</span>
           </p>
         </div>
       </div>

@@ -9,8 +9,6 @@ const Navbar = () => {
             .then(() => { })
             .catch(err => console.log(err));
     }
-
-
     return (
         <div>
             <header aria-label="Site Header" className="border-b border-gray-100">
@@ -31,7 +29,9 @@ const Navbar = () => {
                             </ul>
                         </div>
                         {/* dropdown end*/}
-
+                        <div className='text-2xl font-bold mr-10'>
+                           <span className='text-orange-600'>OLDB</span>azaar
+                        </div>
                         <form className="mb-0 hidden lg:flex">
                             <div className="relative">
                                 <input
@@ -73,19 +73,6 @@ const Navbar = () => {
                                 className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
                                 Blogs
                             </Link>
-
-                            <Link
-                                to="/appointment"
-                                className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
-                                Appointment
-                            </Link>
-
-                            <Link
-                                to="/myReview"
-                                className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
-                                My Review
-                            </Link>
-
                         </nav>
                     </div>
                     <div className="flex flex-1 items-center justify-end">
