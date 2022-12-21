@@ -58,8 +58,6 @@ const MyBookingProducts = () => {
                 </thead>
 
                 <tbody class="divide-y divide-gray-200">
-
-
                     {
                         mybookings.length > 0 &&
                         mybookings.map((product, i) => <tr

@@ -8,20 +8,18 @@ const DashboardHome = () => {
     const [isAdmin, isSeller, isBuyer] = useRole(user?.email);
     
     return (
-        <div>
-            <h1 className="text-5xl">Wellcome to OLDBazaar</h1>
+        <div className='flex flex-col justify-center items-center lg:h-[500px] lg:-mt-20'>
+            <h1 className="text-2xl lg:text-5xl font-bold my-7 text-orange-500">Wellcome to OLDBazaar</h1>
             {
-                isAdmin && <div>
-                    <h1 className="text-5xl">Admin route Loading...</h1>
-                    </div>
+                isAdmin && <h1 className="text-2xl">Admin route</h1>
+                    
             }
             {
-                isSeller && <h1 className="text-2xl">Seller route Loading...</h1>
+                isSeller && <h1 className="text-2xl">Seller route</h1>
             }
             {
-                isBuyer && <div className='min-h-screen'>
-                    <h1 className='text-2xl'>Buyer route Loading...</h1>
-                </div>
+                isBuyer && <h1 className='text-2xl'>Buyer route</h1>
+                
             }
         </div>
     );

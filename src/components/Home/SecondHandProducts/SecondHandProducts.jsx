@@ -62,7 +62,7 @@ const SecondHandProducts = () => {
                         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4">
 
                             {
-                                secondProducts.map(singleProduct => !singleProduct.paid && <Link
+                                secondProducts.map(singleProduct => <Link
                                     to={`/details/${singleProduct._id}`}
                                     className="block shadow-2xl rounded-lg"
                                     key={singleProduct._id}

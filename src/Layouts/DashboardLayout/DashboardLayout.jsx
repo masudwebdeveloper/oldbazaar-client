@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin, isSeller, isBuyer] = useRole(user?.email);
     return (
-        <div>
+        <div className="min-h-screen">
             <Navbar></Navbar>
             <div className="drawer drawer-mobile">
                 <input
@@ -23,7 +23,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul tabIndex={1} className="menu p-4 w-80 text-base-content">
+                    <ul tabIndex={1} className="menu p-4 w-80 bg-slate-100 text-base-content">
                         {isAdmin &&
                             <>
                                 <li className='mb-3'><Link to='/dashboard/allusers'>All Users</Link></li>

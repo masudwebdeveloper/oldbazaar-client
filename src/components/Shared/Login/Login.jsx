@@ -112,7 +112,7 @@ const Login = () => {
                                 </svg>
                             </span>
                             {errors.password && <span className='text-red-600'>{errors.password?.message}</span>}
-                            {loginError && <span className='text-red-600'>{loginError}</span>}
+                            {loginError && <span className='text-red-600'>{loginError.slice(22, -2)}</span>}
                         </div>
                     </div>
 

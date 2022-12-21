@@ -23,6 +23,20 @@ const Navbar = () => {
                             <ul tabIndex="1" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><Link to='/'>Home</Link></li>
                                 <li><Link to='/blogs'>Blogs</Link></li>
+                                {user?.email ?
+                                    <>
+                                        <li><Link to="/dashboard">Dashboard</Link></li>
+                                        <li><Link onClick={handleLogOut} to="/login" className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600">
+                                            Logout
+                                        </Link></li>
+
+                                    </>
+                                    :
+                                    <>
+                                        <li><Link to="/login" >Login</Link></li>
+                                        <li><Link to="/signup">Signup</Link></li>
+                                    </>
+                                }
                             </ul>
                         </div>
                         {/* dropdown end*/}

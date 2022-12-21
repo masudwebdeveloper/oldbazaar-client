@@ -5,10 +5,10 @@ const useBuyer = (email) => {
     const [isBuyerLoading, setIsBuyerLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://old-bazaar-server.vercel.app/users/admin/${email}`)
+            fetch(`https://old-bazaar-server.vercel.app/users/buyer/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    setIsBuyer(data.isAdmin);
+                    setIsBuyer(data.isBuyer);
                     setIsBuyerLoading(false);
                 })
 
