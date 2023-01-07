@@ -103,7 +103,7 @@ const ProductsDetails = () => {
                 <img
                   alt="Tee"
                   src={picture}
-                  class="h-72 w-1/2 mx-auto rounded-xl object-cover lg:h-full p-5 context"
+                  class="h-72 w-1/2 mx-auto rounded-xl object-contain lg:h-[60vh] p-5 context"
                 />
               </div>
 

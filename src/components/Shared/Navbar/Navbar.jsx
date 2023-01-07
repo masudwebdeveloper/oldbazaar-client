@@ -10,7 +10,7 @@ const Navbar = () => {
       .catch((err) => console.log(err.message));
   };
   return (
-    <header aria-label="Site Header" className="sticky top-0 z-30 bg-[#E7ECEE] border-b border-gray-100">
+    <header aria-label="Site Header" className="sticky top-0 z-50 bg-[#E7ECEE] border-b border-gray-100">
       <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between sm:px-6 lg:px-8">
         <div className="flex items-center">
           <div className="dropdown">
