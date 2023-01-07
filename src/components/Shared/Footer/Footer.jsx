@@ -15,6 +15,10 @@ import playStore from "../../../assets/images/play-store.png";
 import paypal from "../../../assets/images/paypal.png";
 import mastercard from "../../../assets/images/mastercard.png";
 import visacard from "../../../assets/images/visacard.png";
+import service1 from "../../../assets/images/service1.png";
+import service2 from "../../../assets/images/service2.png";
+import service3 from "../../../assets/images/service3.png";
+import service4 from "../../../assets/images/service4.png";
 
 const Footer = () => {
   const now = new Date();
@@ -149,6 +153,38 @@ const Footer = () => {
     //   </div>
     // </footer>
     <footer className="max-w-screen-xl mx-auto py-10 px-5 md:px-7 lg:px-10">
+      <section className="border-b-2 py-5 mb-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center md:justify-between">
+        <div className="flex items-center gap-x-4">
+          <img src={service1} alt="service1" />
+          <div className="">
+            <strong className="mb-2 -mt-1 block">Fast & Secure Delivery</strong>
+            <p className="mt-1 text-gray-500">Tell about your service.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-x-4">
+          <img src={service2} alt="service1" />
+          <div className="">
+            <strong className="mb-2 -mt-1 block">Money Back Guarantee</strong>
+            <p className="mt-1 text-gray-500">Within 10 days.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-x-4">
+          <img src={service3} alt="service1" />
+          <div className="">
+            <strong className="mb-2 -mt-1 block">24 Hour Return Policy</strong>
+            <p className="mt-1 text-gray-500">No question ask.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-x-4">
+          <img src={service4} alt="service1" />
+          <div className="">
+            <strong className="mb-2 -mt-1 block">Pro Quality Support</strong>
+            <p className="mt-1 text-gray-500">24/7 Live support.</p>
+          </div>
+        </div>
+        <div></div>
+        <div></div>
+      </section>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-b-2 pb-5">
         <div>
           <strong>Support</strong>
