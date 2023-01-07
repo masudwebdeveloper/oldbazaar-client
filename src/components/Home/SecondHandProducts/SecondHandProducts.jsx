@@ -61,7 +61,7 @@ const SecondHandProducts = () => {
               </h2>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
               {secondProducts.map((singleProduct) => (
                 <Link
                   to={`/details/${singleProduct._id}`}
