@@ -25,93 +25,130 @@ const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layouts/Main/Main");
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main></Main>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: '/home',
-                element: <Home></Home>
-            },
-            {
-                path: '/blogs',
-                element: <Blogs></Blogs>
-            },
-            {
-                path: '/categories/:id',
-                element: <PrivateRoute><CategoriesProducts></CategoriesProducts></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/categories/${params.id}`)
-            },
-            {
-                path: '/details/:id',
-                element: <ProductsDetails></ProductsDetails>,
-                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/products/${params.id}`)
-            },
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-
-        ]
-    },
-    {
-        path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: '/dashboard',
-                element: <DashboardHome></DashboardHome>
-            },
-            {
-                path: '/dashboard/myproducts',
-                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
-            },
-            {
-                path: '/dashboard/allusers',
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-            },
-            {
-                path: '/dashboard/allbuyers',
-                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
-            },
-            {
-                path: '/dashboard/allsellers',
-                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
-            },
-            {
-                path: '/dashboard/addproduct',
-                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
-            },
-            {
-                path: '/dashboard/wishlist',
-                element: <BuyerRoute><WishlistProducts></WishlistProducts></BuyerRoute>
-            },
-            {
-                path: '/dashboard/report',
-                element: <AdminRoute><ReportsProducts></ReportsProducts></AdminRoute>
-            },
-            {
-                path: '/dashboard/mybookings',
-                element: <BuyerRoute><MyBookingProducts></MyBookingProducts></BuyerRoute>
-            },
-            {
-                path: '/dashboard/payment/:id',
-                element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`https://old-bazaar-server.vercel.app/bookings/${params.id}`)
-            },
-
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/home",
+        element: <Home></Home>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
+      },
+      {
+        path: "/categories/:id",
+        element: (
+          <PrivateRoute>
+            <CategoriesProducts></CategoriesProducts>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/categories/${params.id}`),
+      },
+      {
+        path: "/details/:id",
+        element: <ProductsDetails></ProductsDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`),
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome></DashboardHome>,
+      },
+      {
+        path: "/dashboard/myproducts",
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allbuyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allsellers",
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/wishlist",
+        element: (
+          <BuyerRoute>
+            <WishlistProducts></WishlistProducts>
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/report",
+        element: (
+          <AdminRoute>
+            <ReportsProducts></ReportsProducts>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/mybookings",
+        element: (
+          <BuyerRoute>
+            <MyBookingProducts></MyBookingProducts>
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`),
+      },
+    ],
+  },
+]);
 
 export default router;

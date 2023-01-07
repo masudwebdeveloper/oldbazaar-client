@@ -4,13 +4,13 @@ import AdvertisePage from '../AdvertisePage/AdvertisePage';
 import Banner from '../Banner/Banner';
 import Contactus from '../ContactUs/Contactus';
 import SecondHandProducts from '../SecondHandProducts/SecondHandProducts';
-import Subscriber from '../Subcriber/Subscriber';
+// import Subscriber from '../Subcriber/Subscriber';
 
 const Home = () => {
     return (
-        <div>
+        <div className=''>
             <Banner></Banner>
-            <About></About>
+            {/* <About></About> */}
             <AdvertisePage></AdvertisePage>
             <SecondHandProducts></SecondHandProducts>
             <Contactus></Contactus>
