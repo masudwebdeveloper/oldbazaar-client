@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import "./SecondHandProducts.css";
 import { format } from "date-fns";
+import { FaShoppingBasket } from "react-icons/fa";
 
 const SecondHandProducts = () => {
   const [secondProducts, setSecondProducts] = useState([]);
@@ -27,11 +28,17 @@ const SecondHandProducts = () => {
 
   return (
     <section className="mx-auto max-w-[1350px] px-4 py-8">
-      <div>
-        <span className="inline-block h-1 w-12 bg-red-700"></span>
-        <h2 className="mt-1 text-2xl font-extrabold uppercase tracking-wide lg:text-3xl">
-          Phone Finder
+      <div className="mb-14">
+        <span className="inline-block h-1 w-12 bg-[#8C71DB]"></span>
+        <h2 className="mt-1 text-md font-extrabold tracking-wide md:text-md text-[#8C71DB] flex items-center gap-x-3">
+          <span className="w-8 h-8 border-4 border-violet-700 shadow-inner shadow-slate-50 flex items-center justify-center bg-[#8C71DB] rounded-full">
+            <FaShoppingBasket className="inline-block text-red-50 animate-pulse"></FaShoppingBasket>
+          </span>
+          Our Products
         </h2>
+        <h1 className="my-4 text-2xl lg:text-5xl font-extrabold tracking-wide text-gray-900">
+          Explore our Products
+        </h1>
       </div>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
         {secondProducts.map((singleProduct) => (

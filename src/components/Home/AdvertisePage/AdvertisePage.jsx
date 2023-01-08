@@ -25,7 +25,7 @@ const AdvertisePage = () => {
             </span>
             This Week's
           </h2>
-          <h1 className="mt-1 text-2xl lg:text-5xl font-extrabold tracking-wide text-gray-900">
+          <h1 className="my-5 text-2xl lg:text-5xl font-extrabold tracking-wide text-gray-900">
             New Arrivals
           </h1>
         </div>
@@ -71,17 +71,17 @@ const AdvertisePage = () => {
                   Original Price: {product.originalPirce} $
                 </p>
                 <div className="flex items-center justify-center gap-x-2 md:gap-x-4 mt-5">
-                  <button
+                  <Link
                     type="button"
+                    to={`/details/${product.productId}`}
                     class="rounded-full bg-white flex items-center justify-center text-black w-10 h-10 border-2"
                   >
-                    <Link
-                      to={`/details/${product.productId}`}
+                    <button
                       class="text-sm hover:rounded-full duration-500 font-medium"
                     >
                       <FaEye className=""></FaEye>
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                   <button
                     type="button"
                     className="flex items-center justify-center rounded-md bg-[#FF497C] text-white px-4 md:px-5 py-4"
