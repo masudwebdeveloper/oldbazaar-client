@@ -70,11 +70,12 @@ const AdvertisePage = () => {
                 <p class="text-lg line-through font-bold text-gray-300">
                   Original Price: {product.originalPirce} $
                 </p>
+
                 <div className="flex items-center justify-center gap-x-2 md:gap-x-4 mt-5">
                   <Link
                     type="button"
                     to={`/details/${product.productId}`}
-                    class="rounded-full bg-white flex items-center justify-center text-black w-10 h-10 border-2"
+                    class="group hover:scale-110 duration-300 rounded-full shadow-2xl shadow-pink-500 bg-white flex items-center justify-center text-black w-10 h-10 border-2"
                   >
                     <button
                       class="text-sm hover:rounded-full duration-500 font-medium"
@@ -84,7 +85,7 @@ const AdvertisePage = () => {
                   </Link>
                   <button
                     type="button"
-                    className="flex items-center justify-center rounded-md bg-[#FF497C] text-white px-4 md:px-5 py-4"
+                    className="flex items-center justify-center rounded-md bg-[#FF497C] text-white px-4 md:px-5 py-3 hover:scale-110 duration-300"
                   >
                     <Link
                       to={`/details/${product.productId}`}
@@ -110,7 +111,7 @@ const AdvertisePage = () => {
                   </button>
                   <button
                     type="button"
-                    class="rounded-full bg-white flex items-center justify-center text-black border-2 w-10 h-10"
+                    class="rounded-full hover:scale-110 duration-300 bg-white flex items-center justify-center text-black border-2 w-10 h-10"
                   >
                     <span class="sr-only">Wishlist</span>
                     <svg
@@ -129,6 +130,7 @@ const AdvertisePage = () => {
                     </svg>
                   </button>
                 </div>
+
               </div>
             </a>
           ))}

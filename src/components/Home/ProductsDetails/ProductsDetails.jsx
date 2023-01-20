@@ -4,10 +4,21 @@ import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import useRole from "../../../hooks/useRole";
 import BookingModal from "../BookingModal/BookingModal";
+import { Navigation, FreeMode, Thumbs } from "swiper";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import DemoThums from "../DemoThums";
 
 const ProductsDetails = () => {
   const product = useLoaderData();
   const [option, setOption] = useState(true);
+  // const [activeThumb, setThumbsSwiper] = useState();
   const { user } = useContext(AuthContext);
   const {
     _id,
@@ -88,106 +99,68 @@ const ProductsDetails = () => {
   return (
     <div>
       <section>
-        <div class="relative mx-auto max-w-screen-xl px-4 py-8">
+        <div className="relative mx-auto max-w-screen-xl px-4 py-8">
           <div>
-            <h1 class="text-2xl font-bold lg:text-3xl">{title}</h1>
+            <h1 className="text-2xl font-bold lg:text-3xl">{title}</h1>
 
-            <p class="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500">
               year of use: {yearOfUse} year
             </p>
           </div>
 
-          <div class="grid gap-8 lg:grid-cols-4 lg:items-start">
-            <div class="lg:col-span-3">
-              <div class="relative mt-4">
-                <img
-                  alt="Tee"
-                  src={picture}
-                  class="h-72 w-1/2 mx-auto rounded-xl object-contain lg:h-[60vh] p-5 context"
-                />
+          <div className="grid gap-8 lg:grid-cols-4 lg:items-start">
+            {/* use to swiper */}
+
+              <div className="relative lg:col-span-3 mt-4">
+                <DemoThums picture={picture}></DemoThums>
               </div>
 
-              <ul class="mt-1 flex gap-1">
-                <li>
-                  <img
-                    alt="Tee"
-                    src={picture}
-                    class="h-16 w-16 rounded-md object-cover"
-                  />
-                </li>
-
-                <li>
-                  <img
-                    alt="Tee"
-                    src={picture}
-                    class="h-16 w-16 rounded-md object-cover"
-                  />
-                </li>
-
-                <li>
-                  <img
-                    alt="Tee"
-                    src={picture}
-                    class="h-16 w-16 rounded-md object-cover"
-                  />
-                </li>
-
-                <li>
-                  <img
-                    alt="Tee"
-                    src={picture}
-                    class="h-16 w-16 rounded-md object-cover"
-                  />
-                </li>
-              </ul>
-            </div>
-
-            <div class="lg:sticky lg:top-0">
-              <form class="space-y-4 lg:pt-8">
+            <div className="lg:sticky lg:top-0">
+              <form className="space-y-4 lg:pt-8">
                 <fieldset>
-                  <legend class="text-lg font-bold">
+                  <legend className="text-lg font-bold">
                     SellerName: {sellerName}
                   </legend>
 
-                  <div class="mt-2 flex gap-1">
-                    <label for="material_cotton" class="cursor-pointer">
+                  <div className="mt-2 flex gap-1">
+                    <label for="material_cotton" className="cursor-pointer">
                       <input
                         type="radio"
                         id="material_cotton"
                         name="material"
-                        class="peer sr-only"
+                        className="peer sr-only"
                         checked
                       />
 
-                      <span class="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
+                      <span className="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
                         Post Date: {postTime}
                       </span>
                     </label>
 
-                    <label for="material_wool" class="cursor-pointer">
+                    <label for="material_wool" className="cursor-pointer">
                       <input
                         type="radio"
                         id="material_wool"
                         name="material"
-                        class="peer sr-only"
+                        className="peer sr-only"
                         checked
                       />
 
-                      <span class="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
+                      <span className="block rounded-full border border-gray-200 px-3 py-1 text-xs peer-checked:bg-gray-100">
                         location: {location}
                       </span>
                     </label>
                   </div>
                 </fieldset>
 
-                <div class="rounded border bg-gray-100 p-4">
-                  <p class="text-sm">
-                    <span class="block">
+                <div className="rounded border bg-gray-100 p-4">
+                  <p className="text-sm">
+                    <span className="block">
                       {" "}
                       Pay as low as $3/mo with 0% APR.{" "}
                     </span>
 
-                    <Link to="/" class="mt-1 inline-block underline">
+                    <Link to="/" className="mt-1 inline-block underline">
                       {" "}
                       Find out more{" "}
                     </Link>
@@ -195,10 +168,10 @@ const ProductsDetails = () => {
                 </div>
 
                 <div>
-                  <p class="text-xl font-bold text-green-500">
+                  <p className="text-xl font-bold text-green-500">
                     Resale Price: ${resalePirce}
                   </p>
-                  <p class="text-xl font-bold">
+                  <p className="text-xl font-bold">
                     Original Price: ${originalPirce}
                   </p>
                 </div>
@@ -207,7 +180,7 @@ const ProductsDetails = () => {
                   type="submit"
                   htmlFor="booking-modal"
                   disabled={isSeller || isAdmin}
-                  class={`w-full btn rounded px-6 bg-primary py-3 text-sm font-bold uppercase tracking-wide text-white`}
+                  className={`w-full btn rounded px-6 bg-primary py-3 text-sm font-bold uppercase tracking-wide text-white`}
                 >
                   Buy Now
                 </label>
@@ -215,16 +188,16 @@ const ProductsDetails = () => {
                 <div className="flex justify-between mt-5">
                   <button
                     type="button"
-                    class={`rounded-full ${
+                    className={`rounded-full ${
                       wishlist ? "bg-red-600" : "bg-black"
-                    } p-2 text-white animate-bounce`}
+                    } p-2 text-white`}
                     title="Wishlist"
                     disabled={isSeller || isAdmin}
                     onClick={() => handleWishlist(product)}
                   >
-                    <span class="sr-only">Wishlist</span>
+                    <span className="sr-only">Wishlist</span>
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -240,12 +213,12 @@ const ProductsDetails = () => {
                   </button>
                   <button
                     type="button"
-                    class={`rounded-full bg-black p-2 text-white animate-bounce`}
+                    className={`rounded-full bg-black p-2 text-white`}
                     title="Report"
                     disabled={isSeller || isAdmin}
                     onClick={() => handleReport(product)}
                   >
-                    <span class="sr-only">Report</span>
+                    <span className="sr-only">Report</span>
 
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +226,7 @@ const ProductsDetails = () => {
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                     >
                       <path
                         stroke-linecap="round"
@@ -266,8 +239,8 @@ const ProductsDetails = () => {
               </form>
             </div>
 
-            <div class="lg:col-span-3">
-              <div class="prose max-w-none [&>iframe]:mt-6 [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:rounded-xl">
+            <div className="lg:col-span-3">
+              <div className="prose max-w-none [&>iframe]:mt-6 [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:rounded-xl">
                 <p>{description}</p>
 
                 <h2>Features</h2>

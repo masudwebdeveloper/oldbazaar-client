@@ -6,7 +6,7 @@ import Button from "../../Others/Button/Button";
 const Banner = () => {
   return (
     <div className="bg-[#F9F3F0]">
-      <section className="flex h-screen w-full justify-between items-center px-8 max-w-[1350px] mx-auto -z-50">
+      <section className="flex h-screen w-full justify-between items-center px-8 max-w-[1350px] mx-auto -z-50 overflow-hidden">
         <div className="space-y-8">
           <h1 className="space-y-3 text-5xl font-semibold tracking-wide lg:text-6xl xl:text-7xl">
             <span className="block bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent">
@@ -14,7 +14,7 @@ const Banner = () => {
                 sequence={[
                   "Choose your", // Types 'One'
                   1000, // Waits 1s
-                  "favorite one.", // Deletes 'One' and types 'Two'
+                  "Favorite one.", // Deletes 'One' and types 'Two'
                   2000, // Waits 2s
                   () => {
                     // Place optional callbacks anywhere in the array
