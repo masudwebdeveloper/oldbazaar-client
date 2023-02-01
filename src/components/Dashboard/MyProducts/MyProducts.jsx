@@ -11,7 +11,7 @@ const MyProducts = () => {
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myproducts?email=${user?.email}`
+        `https://old-bazaar-server.vercel.app/myproducts?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -19,7 +19,7 @@ const MyProducts = () => {
   });
 
   const handleDelete = (product) => {
-    fetch(`http://localhost:5000/myproducts/${product._id}`, {
+    fetch(`https://old-bazaar-server.vercel.app/myproducts/${product._id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -44,7 +44,7 @@ const MyProducts = () => {
       isAdvertise: true,
     };
     delete advertiseProductData._id;
-    fetch("http://localhost:5000/advertise", {
+    fetch("https://old-bazaar-server.vercel.app/advertise", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,7 @@ const MyProducts = () => {
 
   const handleDeleteFromAdvertise = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/advertise/${id}`, {
+    fetch(`https://old-bazaar-server.vercel.app/advertise/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

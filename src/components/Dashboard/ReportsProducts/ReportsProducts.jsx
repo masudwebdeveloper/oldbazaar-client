@@ -10,7 +10,7 @@ const ReportsProducts = () => {
   const { data: reports = [], refetch } = useQuery({
     queryKey: ["wishlist"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/report`);
+      const res = await fetch(`https://old-bazaar-server.vercel.app/report`);
       const data = await res.json();
       return data;
     },
@@ -21,12 +21,15 @@ const ReportsProducts = () => {
       `Are you sure. do you want delete ${product?.title}`
     );
     if (procceed) {
-      fetch(`http://localhost:5000/reportproduct/${product.productId}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://old-bazaar-server.vercel.app/reportproduct/${product.productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
@@ -41,7 +44,7 @@ const ReportsProducts = () => {
 
   const handleReportDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/reportproductdelete/${id}`, {
+    fetch(`https://old-bazaar-server.vercel.app/reportproductdelete/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

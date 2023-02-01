@@ -5,7 +5,7 @@ const AllBuyers = () => {
   const [allBuyers, setAllBuyers] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allbuyers", {
+      .get("https://old-bazaar-server.vercel.app/allbuyers", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

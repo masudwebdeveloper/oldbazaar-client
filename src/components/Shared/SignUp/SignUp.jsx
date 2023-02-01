@@ -64,7 +64,7 @@ const SignUp = () => {
 
   const saveUser = (name, email, role) => {
     const userInfo = { name, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://old-bazaar-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

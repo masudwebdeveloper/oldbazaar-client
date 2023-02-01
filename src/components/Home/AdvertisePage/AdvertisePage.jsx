@@ -7,9 +7,12 @@ const AdvertisePage = () => {
   const { data: adveritse = [] } = useQuery({
     queryKey: ["advertise"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/advertise", {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      });
+      const res = await fetch(
+        "https://old-bazaar-server.vercel.app/advertise",
+        {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -77,9 +80,7 @@ const AdvertisePage = () => {
                     to={`/details/${product.productId}`}
                     class="group hover:scale-110 duration-300 rounded-full shadow-2xl shadow-pink-500 bg-white flex items-center justify-center text-black w-10 h-10 border-2"
                   >
-                    <button
-                      class="text-sm hover:rounded-full duration-500 font-medium"
-                    >
+                    <button class="text-sm hover:rounded-full duration-500 font-medium">
                       <FaEye className=""></FaEye>
                     </button>
                   </Link>
@@ -130,7 +131,6 @@ const AdvertisePage = () => {
                     </svg>
                   </button>
                 </div>
-
               </div>
             </a>
           ))}

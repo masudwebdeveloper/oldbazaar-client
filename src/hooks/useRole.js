@@ -9,7 +9,7 @@ const useRole = (email) => {
   const [isSellerLoading, setIsSellerLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/user/role/${email}`)
+      fetch(`https://old-bazaar-server.vercel.app/user/role/${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.role === "admin") {

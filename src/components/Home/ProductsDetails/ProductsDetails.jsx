@@ -42,7 +42,7 @@ const ProductsDetails = () => {
       productId: product._id,
     };
     delete wishlistProduct._id;
-    fetch(`http://localhost:5000/wishlist`, {
+    fetch(`https://old-bazaar-server.vercel.app/wishlist`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -74,7 +74,7 @@ const ProductsDetails = () => {
       report: "Reported",
     };
     delete reportProduct._id;
-    fetch(`http://localhost:5000/report`, {
+    fetch(`https://old-bazaar-server.vercel.app/report`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -111,9 +111,9 @@ const ProductsDetails = () => {
           <div className="grid gap-8 lg:grid-cols-4 lg:items-start">
             {/* use to swiper */}
 
-              <div className="relative lg:col-span-3 mt-4">
-                <DemoThums picture={picture}></DemoThums>
-              </div>
+            <div className="relative lg:col-span-3 mt-4">
+              <DemoThums picture={picture}></DemoThums>
+            </div>
 
             <div className="lg:sticky lg:top-0">
               <form className="space-y-4 lg:pt-8">

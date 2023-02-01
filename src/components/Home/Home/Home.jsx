@@ -1,5 +1,4 @@
 import React from 'react';
-import About from '../About/About';
 import AdvertisePage from '../AdvertisePage/AdvertisePage';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';

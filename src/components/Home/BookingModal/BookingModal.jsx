@@ -42,7 +42,7 @@ const BookingModal = ({ product, setOption }) => {
       buyerLocation,
       status: "booked",
     };
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://old-bazaar-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import "./SecondHandProducts.css";
 import { format } from "date-fns";
@@ -7,9 +6,7 @@ import { FaEye, FaShoppingBasket } from "react-icons/fa";
 
 const SecondHandProducts = () => {
   const [secondProducts, setSecondProducts] = useState([]);
-  // const [size, setSize] = useState(8);
   const [page, setPage] = useState(0);
-  // const [count, setCount] = useState([]);
 
   const date = new Date();
   const today = format(date, "PP");
@@ -18,11 +15,12 @@ const SecondHandProducts = () => {
   const pages = Math.ceil(newCount / 8);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products?size=${8}&page=${page}`)
+    fetch(
+      `https://old-bazaar-server.vercel.app/products?size=${8}&page=${page}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSecondProducts(data.products);
-        // setCount(data.products);
       });
   }, [page]);
 
